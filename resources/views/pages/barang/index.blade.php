@@ -7,7 +7,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Data Sales</h4>
+                    <h4 class="card-title">Data Barang</h4>
                 </div>
                 <div class="card-content">
                     <div class="card-body card-dashboard">
@@ -15,30 +15,36 @@
                             <table class="table zero-configuration">
                                 <thead>
                                     <tr>
-                                        <th>Username</th>
-                                        <th>Nama Sales</th>
-                                        <th>Alamat Sales</th>
-                                        <th>Umur Sales</th>
-                                        <th>Jenis Kelamin</th>
+                                        <th>Nama Barang</th>
+                                        <th>Harga Barang</th>
+                                        <th>Kategori Barang</th>
+                                        <th>Foto Barang</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($sales as $s)
+                                    @foreach ($barang as $b)
                                         <tr>
-                                            <td>{{$s->username}}</td>
-                                            <td>{{$s->nama_sales}}</td>
-                                            <td>{{$s->alamat_sales}}</td>
-                                            <td>{{$s->umur_sales}}</td>
-                                            <td>{{$s->gender_sales}}</td>
+                                            <td>{{$b->nama_barang}}</td>
+                                            <td>{{number_format($b->harga_barang)}}</td>
                                             <td>
-                                                <a href="{{route("updateSales",$s)}}" class="w-100 btn btn-primary btn-sm">Update</a>
-                                                <form class="mt-1" action="{{route("deleteSales",$s)}}" method="post">
+                                                {{isset($b->kategori) ? $b->kategori->nama_kategori : "Tidak Ada Kategori"}}
+                                            </td>
+                                            <td>
+                                                @if ($b->foto_barang === "Tidak Ada Foto")
+                                                    {{$b->foto_barang}}
+                                                @else
+                                                    <img class="w-50" src="/assets/images/{{$b->foto_barang}}" alt="Barang">
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{route("updateBarang",$b)}}" class="w-100 btn btn-primary btn-sm">Update</a>
+                                                <form class="mt-1" action="{{route("deleteBarang",$b)}}" method="post">
+                                                    @method('delete')
                                                     @csrf
-                                                    @method("delete")
                                                     <button
-                                                    onclick="return confirm('Yakin Akan Menghapus Data Ini ? ')"
-                                                    type="submit" class="w-100 btn btn-danger btn-sm">Hapus</button>
+                                                    onclick="return confirm('Yakin Akan Menghapus Data Ini ?')"
+                                                    class="w-100 btn btn-danger btn-sm">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -46,11 +52,10 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Username</th>
-                                        <th>Nama Sales</th>
-                                        <th>Alamat Sales</th>
-                                        <th>Umur Sales</th>
-                                        <th>Jenis Kelamin</th>
+                                        <th>Nama Barang</th>
+                                        <th>Harga Barang</th>
+                                        <th>Kategori Barang</th>
+                                        <th>Foto Barang</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </tfoot>

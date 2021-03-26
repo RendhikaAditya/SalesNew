@@ -7,7 +7,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Data Sales</h4>
+                    <h4 class="card-title">Data Costumer</h4>
                 </div>
                 <div class="card-content">
                     <div class="card-body card-dashboard">
@@ -15,30 +15,28 @@
                             <table class="table zero-configuration">
                                 <thead>
                                     <tr>
-                                        <th>Username</th>
-                                        <th>Nama Sales</th>
-                                        <th>Alamat Sales</th>
-                                        <th>Umur Sales</th>
-                                        <th>Jenis Kelamin</th>
+                                        <th>Nama Costumer</th>
+                                        <th>Alamat Costumer</th>
+                                        <th>Target Harga Costumer</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($sales as $s)
+                                    @foreach ($costumer as $c)
                                         <tr>
-                                            <td>{{$s->username}}</td>
-                                            <td>{{$s->nama_sales}}</td>
-                                            <td>{{$s->alamat_sales}}</td>
-                                            <td>{{$s->umur_sales}}</td>
-                                            <td>{{$s->gender_sales}}</td>
+                                            <td>{{$c->nama_costumer}}</td>
+                                            <td>{{$c->alamat_costumer}}</td>
+                                            <td>{{number_format($c->targer_harga_costumer)}}</td>
                                             <td>
-                                                <a href="{{route("updateSales",$s)}}" class="w-100 btn btn-primary btn-sm">Update</a>
-                                                <form class="mt-1" action="{{route("deleteSales",$s)}}" method="post">
+                                                <a href="{{route("updateCostumer",$c)}}" class="w-100 btn btn-primary btn-sm">Update</a>
+                                                <form class="mt-1" action="{{route("deleteCostumer",$c)}}" method="post">
                                                     @csrf
                                                     @method("delete")
                                                     <button
-                                                    onclick="return confirm('Yakin Akan Menghapus Data Ini ? ')"
-                                                    type="submit" class="w-100 btn btn-danger btn-sm">Hapus</button>
+                                                    onclick="return confirm('Yakin Akan Menghapus Data Ini ?')"
+                                                    type="submit" class="btn btn-danger btn-sm w-100">
+                                                    Hapus
+                                                </button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -46,11 +44,9 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Username</th>
-                                        <th>Nama Sales</th>
-                                        <th>Alamat Sales</th>
-                                        <th>Umur Sales</th>
-                                        <th>Jenis Kelamin</th>
+                                        <th>Nama Costumer</th>
+                                        <th>Alamat Costumer</th>
+                                        <th>Target Harga Costumer</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </tfoot>
