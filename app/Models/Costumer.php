@@ -13,6 +13,10 @@ class Costumer extends Model
     protected $fillable = [
         'nama_costumer',
         'alamat_costumer',
-        'target_harga_costumer',
+        'targer_harga_costumer',
     ];
+
+    public function order() {
+        return $this->hasMany(Order::class, "id_costumer");
+    }
 }
