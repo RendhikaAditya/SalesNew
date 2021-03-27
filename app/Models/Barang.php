@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Detail_Order;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Barang extends Model
 {
@@ -20,6 +21,10 @@ class Barang extends Model
 
     public function kategori() {
         return $this->belongsTo(Kategori::class, "id_kategori");
+    }
+
+    public function detail_order() {
+        return $this->hasMany(Detail_Order::class, "id_barang");
     }
 
 }
