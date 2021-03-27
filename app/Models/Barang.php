@@ -19,6 +19,7 @@ class Barang extends Model
         'foto_barang',
     ];
 
+
     public function kategori() {
         return $this->belongsTo(Kategori::class, "id_kategori");
     }
