@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ContollerBarang;
+use App\Http\Controllers\Api\ContollerCostumer;
+use App\Http\Controllers\Api\ContollerSales;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post("/barang", [ContollerBarang::class, 'all']);
+Route::get("/kategori", [ContollerBarang::class, 'kategori']);
+Route::get("/costumer", [ContollerCostumer::class, 'all']);
+Route::post("/sales/login", [ContollerSales::class, 'login']);
