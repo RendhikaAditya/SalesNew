@@ -18,4 +18,9 @@ class Sales extends Model
         'username',
         'password',
     ];
+
+    public function order() {
+        return $this->hasMany(Order::class, "id_sales");
+    }
+
 }

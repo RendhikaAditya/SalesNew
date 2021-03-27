@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class AdminSeeder extends Seeder
+class SupervisorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,9 +15,9 @@ class AdminSeeder extends Seeder
     public function run()
     {
         User::create([
-            "id_level" => 1,
-            "name" => "admin",
-            "email" => "admin@gmail.com",
+            "id_level" => 2,
+            "name" => "supervisor",
+            "email" => "supervisor@gmail.com",
             "password" => bcrypt(123),
         ]);
     }
