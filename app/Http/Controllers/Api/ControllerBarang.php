@@ -9,7 +9,7 @@ use App\Models\Barang;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 
-class ContollerBarang extends Controller
+class ControllerBarang extends Controller
 {
     public function all(Request $request)
     {
@@ -49,6 +49,7 @@ class ContollerBarang extends Controller
 
         if ($kategori) {
             $barang->where('barang.id_kategori', '=', $kategori);
+            $limit = 20000;
         }
 
         if ($barang) {
@@ -60,11 +61,12 @@ class ContollerBarang extends Controller
 
     public function kategori()
     {
-        $barang = Kategori::all();
+
+        $barang = Kategori::select();
 
         if ($barang) {
 
-            return ResponseFormatter::success($barang);
+            return ResponseFormatter::success($barang->paginate(2));
         } else {
             return ResponseFormatter::error(null, 404);
         }

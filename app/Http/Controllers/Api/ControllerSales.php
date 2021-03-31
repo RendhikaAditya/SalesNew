@@ -7,7 +7,7 @@ use App\Models\Sales;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class ContollerSales extends Controller
+class ControllerSales extends Controller
 {
     public function login(Request $request)
     {
