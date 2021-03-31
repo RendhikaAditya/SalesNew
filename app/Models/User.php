@@ -17,14 +17,10 @@ class User extends Authenticatable
      * @var array
      */
 
-    protected $table = 'barang';
     protected $primaryKey = 'id';
-    protected $fillable = [
-        'id_kategori',
-        'nama',
-        'harga',
-        'foto',
-    ];
+   protected $fillable = [
+        "id_level", "name", "email", "password"
+   ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -44,4 +40,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function level() {
+        return $this->belongsTo(Level::class,"id_level","id_level");
+    }
+
 }

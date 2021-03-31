@@ -8,10 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Detail_Order extends Model
 {
     use HasFactory;
-    protected $table = 'order';
+    protected $table = 'detail_order';
     protected $primaryKey = 'id_order';
     protected $fillable = [
         'id_barang',
         'jml_barang',
+        "status"
     ];
+
+    public function order() {
+        return $this->belongsTo(Order::class, "id_order");
+    }
+
+    public function barang() {
+        return $this->belongsTo(Barang::class, "id_barang");
+    }
+
 }
