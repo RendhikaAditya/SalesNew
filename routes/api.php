@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ContollerBarang;
 use App\Http\Controllers\Api\ContollerCostumer;
 use App\Http\Controllers\Api\ContollerSales;
+use App\Http\Controllers\Api\KeranjangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,12 @@ Route::post("/barang", [ContollerBarang::class, 'all']);
 Route::get("/kategori", [ContollerBarang::class, 'kategori']);
 Route::get("/costumer", [ContollerCostumer::class, 'all']);
 Route::post("/sales/login", [ContollerSales::class, 'login']);
+
+Route::group(["prefix" => "keranjang"], function() {
+    Route::get('/total-belanja', [KeranjangController::class, "total"]);
+    Route::post('/add', [KeranjangController::class, "add"]);
+    Route::post('/update-tambah', [KeranjangController::class, 'updateTambah']);
+    Route::post('/update-kurang', [KeranjangController::class, 'updateKurang']);
+    Route::post('/update-harga', [KeranjangController::class, 'updateHarga']);
+    Route::post('/hapus-keranjang', [KeranjangController::class, 'hapusKeranjang']);
+});

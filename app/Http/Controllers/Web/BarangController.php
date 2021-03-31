@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Web;
 
 use App\Models\Barang;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Kategori;
+use function PHPUnit\Framework\isNull;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
-
-use function PHPUnit\Framework\isNull;
+use App\Http\Requests\Barang\UpdateBarangRequest;
 
 class BarangController extends Controller
 {
@@ -24,7 +24,7 @@ class BarangController extends Controller
         return view("pages.barang.update",compact("b", "kategori"));
     }
 
-    public function putUpdateBarang(Request $request, Barang $b) {
+    public function putUpdateBarang(UpdateBarangRequest $request, Barang $b) {
         $filename = $request->foto_barang === null ? $b->foto_barang : $request->file("foto_barang")->store("barang");
         $request->foto_barang === null ? "" : Storage::delete($b->foto_barang);
         $data = $request->all();
@@ -41,7 +41,7 @@ class BarangController extends Controller
         return view("pages.barang.add",compact("kategori"));
     }
 
-    public function postAddBarang(Request $request) {
+    public function postAddBarang(UpdateBarangRequest $request) {
         $data = $request->all();
         $filename = $request->foto_barang !== null ? $request->file("foto_barang")->store("barang") : "Tidak Ada Foto";
         $data["foto_barang"] = $filename;
