@@ -2,7 +2,7 @@
 <div class="col-md-12 col-12">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Data Sales</h4>
+            <h4 class="card-title">Data Barang</h4>
         </div>
         <div class="card-content">
             <div class="card-body">
@@ -18,7 +18,7 @@
                                     id="first-name-icon"
                                     class="form-control @error("nama_barang") is-invalid @enderror"
                                     name="nama_barang"
-                                    placeholder="Nama Sales">
+                                    placeholder="Nama Barang">
                                     <div class="form-control-position">
                                         <i class="feather icon-user"></i>
                                     </div>
@@ -38,9 +38,9 @@
                                     id="email-id-icon"
                                     class="form-control @error("harga_barang") is-invalid @enderror"
                                     name="harga_barang"
-                                    placeholder="Alamat Sales">
+                                    placeholder="Harga Barang">
                                     <div class="form-control-position">
-                                        <i class="feather icon-mail"></i>
+                                        <i class="feather icon-dollar-sign"></i>
                                     </div>
                                     @error('harga_barang')
                                         <div class="invalid-feedback">{{$message}}</div>
