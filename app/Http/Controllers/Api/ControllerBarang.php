@@ -24,6 +24,7 @@ class ControllerBarang extends Controller
                 'kategori',
                 function ($join) {
                     $join->on('barang.id_kategori', '=', 'kategori.id_kategori');
+                    // $join->on(`keranjang` . `id_barang`, '=', '`barang`.`id_barang`');
                     return $join;
                 }
             )->find($id);
@@ -41,7 +42,14 @@ class ControllerBarang extends Controller
                 $join->on('barang.id_kategori', '=', 'kategori.id_kategori');
                 return $join;
             }
-        );
+        )
+            ->leftJoin(
+                'keranjang',
+                function ($join1) {
+                    $join1->on('keranjang.id_barang', '=', 'barang.id_barang');
+                    return $join1;
+                }
+            );
 
         if ($nama) {
             $barang->where('nama_barang', 'like', '%' . $nama . '%');
@@ -53,7 +61,7 @@ class ControllerBarang extends Controller
         }
 
         if ($barang) {
-            return ResponseFormatter::success($barang->paginate($limit));
+            return ResponseFormatter::success($barang->paginate($limit), "mas");
         } else {
             return ResponseFormatter::error(null, 404);
         }
