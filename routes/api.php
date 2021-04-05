@@ -11,7 +11,7 @@ use App\Http\Controllers\Api\ControllerSales;
 // use App\Http\Controllers\Api\ContollerCostumer;
 // use App\Http\Controllers\Api\ContollerSales;
 use App\Http\Controllers\Api\KeranjangController;
-
+use App\Http\Controllers\Api\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,4 +48,8 @@ Route::group(["prefix" => "keranjang"], function () {
     Route::post('/update-kurang', [KeranjangController::class, 'updateKurang']);
     Route::post('/update-harga', [KeranjangController::class, 'updateHarga']);
     Route::post('/hapus-keranjang', [KeranjangController::class, 'hapusKeranjang']);
+});
+
+Route::group(["prefix" => "transaksi"], function() {
+    Route::post('', [TransaksiController::class, "transaksi"]);
 });

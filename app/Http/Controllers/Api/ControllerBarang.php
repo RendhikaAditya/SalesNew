@@ -25,6 +25,7 @@ class ControllerBarang extends Controller
                 'kategori',
                 function ($join) {
                     $join->on('barang.id_kategori', '=', 'kategori.id_kategori');
+                    // $join->on(`keranjang` . `id_barang`, '=', '`barang`.`id_barang`');
                     return $join;
                 }
             )
@@ -65,16 +66,27 @@ class ControllerBarang extends Controller
                 $join->on('barang.id_kategori', '=', 'kategori.id_kategori');
                 return $join;
             }
+
         );
-        $barang->leftJoin(
-            'keranjang',
-            function ($join1) {
-                $join1->on('barang.id_barang', '=', 'keranjang.id_barang');
-                return $join1;
-            }
-        );
+//         $barang->leftJoin(
+//             'keranjang',
+//             function ($join1) {
+//                 $join1->on('barang.id_barang', '=', 'keranjang.id_barang');
+//                 return $join1;
+//             }
+//         );
 
 
+
+
+//         )
+//             ->leftJoin(
+//                 'keranjang',
+//                 function ($join1) {
+//                     $join1->on('keranjang.id_barang', '=', 'barang.id_barang');
+//                     return $join1;
+//                 }
+//             );
 
 
         if ($nama) {
@@ -92,9 +104,8 @@ class ControllerBarang extends Controller
             $limit = 20000;
         }
 
-        if ($barang) {
-            // dd($barang->toSql());
-            return ResponseFormatter::success($barang->paginate($limit), $barang->toSql());
+       if ($barang) {
+            return ResponseFormatter::success($barang->paginate($limit), "mas");
         } else {
             return ResponseFormatter::error(null, 404);
         }

@@ -1,7 +1,6 @@
 @extends('welcome')
 
 @section('content')
-
 <section id="basic-datatable">
     <div class="row">
         <div class="col-12">
@@ -22,7 +21,7 @@
                                         <th>Total Harga</th>
                                         <th>Tanggal Order</th>
                                         <th>Status</th>
-                                        @if (Auth::user()->id_level === "2")
+                                        @if (Auth::user()->id_level == 2)
                                             <th>Aksi</th>
                                         @endif
                                     </tr>
@@ -47,7 +46,7 @@
                                                     }}
                                                 </div>
                                             </td>
-                                            @if (Auth::user()->id_level === "2")
+                                            @if (Auth::user()->id_level == "2")
                                                 <td>
                                                     {{-- {{dd($o)}} --}}
                                                     @if ($o->status === "0")
@@ -70,7 +69,7 @@
                                         <th>Total Harga</th>
                                         <th>Tanggal Order</th>
                                         <th>Status</th>
-                                        @if (Auth::user()->id_level === "2")
+                                        @if (Auth::user()->id_level == 2)
                                             <th>Aksi</th>
                                         @endif
                                     </tr>
