@@ -18,6 +18,7 @@ class ControllerBarang extends Controller
         $limit = $request->input('limit', 6);
         $nama = $request->input('nama');
         $kategori = $request->input('kategori');
+        $filterKategori = $request->input('filterKategori');
 
         if ($id) {
             $barang = Barang::leftJoin(
@@ -27,7 +28,14 @@ class ControllerBarang extends Controller
                     // $join->on(`keranjang` . `id_barang`, '=', '`barang`.`id_barang`');
                     return $join;
                 }
-            )->find($id);
+            )
+                ->leftJoin(
+                    'keranjang',
+                    function ($join1) {
+                        $join1->on('keranjang.id_barang', '=', 'barang.id_barang');
+                        return $join1;
+                    }
+                )->find($id);
 
             if ($barang) {
                 return ResponseFormatter::success($barang);
@@ -36,23 +44,54 @@ class ControllerBarang extends Controller
             }
         }
 
-        $barang = Barang::leftJoin(
+
+        // $barang = Barang::leftJoin(
+        //     'kategori',
+        //     function ($join) {
+        //         $join->on('barang.id_kategori', '=', 'kategori.id_kategori');
+        //         return $join;
+        //     }
+        // )
+        //     ->leftJoin(
+        //         'keranjang',
+        //         function ($join1) {
+        //             $join1->on('barang.id_barang', '=', 'keranjang.id_barang');
+        //             return $join1;
+        //         }
+        //     );
+        $barang = Barang::select('barang.id_barang', 'barang.nama_barang', 'barang.harga_barang', 'kategori.id_kategori', 'keranjang.jml_barang', 'keranjang.id_costumer', 'barang.foto_barang', 'keranjang.harga AS hargaSementara');
+        $barang->leftJoin(
             'kategori',
             function ($join) {
                 $join->on('barang.id_kategori', '=', 'kategori.id_kategori');
                 return $join;
             }
-        )
-            ->leftJoin(
-                'keranjang',
-                function ($join1) {
-                    $join1->on('keranjang.id_barang', '=', 'barang.id_barang');
-                    return $join1;
-                }
-            );
+
+        );
+//         $barang->leftJoin(
+//             'keranjang',
+//             function ($join1) {
+//                 $join1->on('barang.id_barang', '=', 'keranjang.id_barang');
+//                 return $join1;
+//             }
+//         );
+
+
+
+
+//         )
+//             ->leftJoin(
+//                 'keranjang',
+//                 function ($join1) {
+//                     $join1->on('keranjang.id_barang', '=', 'barang.id_barang');
+//                     return $join1;
+//                 }
+//             );
+
 
         if ($nama) {
             $barang->where('nama_barang', 'like', '%' . $nama . '%');
+            $limit = 20000;
         }
 
         if ($kategori) {
@@ -60,7 +99,12 @@ class ControllerBarang extends Controller
             $limit = 20000;
         }
 
-        if ($barang) {
+        if ($filterKategori) {
+            $barang->where('kategori.nama_kategori', '=', $filterKategori);
+            $limit = 20000;
+        }
+
+       if ($barang) {
             return ResponseFormatter::success($barang->paginate($limit), "mas");
         } else {
             return ResponseFormatter::error(null, 404);
@@ -75,6 +119,20 @@ class ControllerBarang extends Controller
         if ($barang) {
 
             return ResponseFormatter::success($barang->paginate(2));
+        } else {
+            return ResponseFormatter::error(null, 404);
+        }
+    }
+
+
+    public function kategoriAll()
+    {
+
+        $barang = Kategori::get();
+
+        if ($barang) {
+
+            return ResponseFormatter::success($barang);
         } else {
             return ResponseFormatter::error(null, 404);
         }

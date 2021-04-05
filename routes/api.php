@@ -31,6 +31,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post("/barang", [ControllerBarang::class, 'all']);
 Route::get("/kategori", [ControllerBarang::class, 'kategori']);
+Route::get("/kategoriAll", [ControllerBarang::class, 'kategoriAll']);
 Route::get("/costumer", [ControllerCostumer::class, 'all']);
 Route::post("/costumer/get", [ControllerCostumer::class, 'getCostumer']);
 Route::post("/sales/login", [ControllerSales::class, 'login']);
