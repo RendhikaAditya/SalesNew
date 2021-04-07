@@ -16,6 +16,6 @@ class Keranjang extends Model
         'id_sales',
         'id_barang',
         'jml_barang',
-        "harga"
+        'harga'
     ];
 }

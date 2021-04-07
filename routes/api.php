@@ -42,6 +42,7 @@ Route::post("/sales/login", [ControllerSales::class, 'login']);
 // Route::post("/sales/login", [ContollerSales::class, 'login']);
 
 Route::group(["prefix" => "keranjang"], function () {
+    Route::get('/cost', [KeranjangController::class, 'keranjangCostumer']);
     Route::get('/total-belanja', [KeranjangController::class, "total"]);
     Route::post('/add', [KeranjangController::class, "add"]);
     Route::post('/update-tambah', [KeranjangController::class, 'updateTambah']);
@@ -50,6 +51,7 @@ Route::group(["prefix" => "keranjang"], function () {
     Route::post('/hapus-keranjang', [KeranjangController::class, 'hapusKeranjang']);
 });
 
-Route::group(["prefix" => "transaksi"], function() {
+Route::group(["prefix" => "transaksi"], function () {
     Route::post('', [TransaksiController::class, "transaksi"]);
+    Route::get('/histori', [TransaksiController::class, "ambil_histori"]);
 });

@@ -14,15 +14,17 @@ class Detail_Order extends Model
         "id_order",
         'id_barang',
         'jml_barang',
+        'harga',
         "status"
     ];
 
-    public function order() {
+    public function order()
+    {
         return $this->belongsTo(Order::class, "id_order");
     }
 
-    public function barang() {
+    public function barang()
+    {
         return $this->belongsTo(Barang::class, "id_barang");
     }
-
 }

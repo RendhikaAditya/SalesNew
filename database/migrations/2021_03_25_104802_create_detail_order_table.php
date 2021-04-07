@@ -17,6 +17,7 @@ class CreateDetailOrderTable extends Migration
             $table->string('id_order');
             $table->integer('id_barang');
             $table->integer('jml_barang');
+            $table->double('harga');
             $table->timestamps();
         });
     }
