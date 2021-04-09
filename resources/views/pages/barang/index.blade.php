@@ -31,7 +31,7 @@
                                                 {{isset($b->kategori) ? $b->kategori->nama_kategori : "Tidak Ada Kategori"}}
                                             </td>
                                             <td>
-                                                @if ($b->foto_barang === "Tidak Ada Foto")
+                                                @if ($b->foto_barang === "Tidak Ada Foto" || $b->foto_barang === "null")
                                                     {{$b->foto_barang}}
                                                 @else
                                                     <img class="w-50" src="/assets/images/{{$b->foto_barang}}" alt="Barang">

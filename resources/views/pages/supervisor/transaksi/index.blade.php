@@ -6,6 +6,51 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
+                    <h4 class="card-title">Filter Data Transaksi</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body card-dashboard">
+                        <form action="{{route("filter_transaksi")}}">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="">Nama Costumer</label>
+                                        <input type="text" name="costumer" class="form-control" placeholder="Nama Costumer">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="">Nama Sales</label>
+                                        <input type="text" name="sales" class="form-control" placeholder="Nama Sales">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="">Tanggal Awal</label>
+                                        <input type="date" name="tgl_awal" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="">Tanggal Akhir</label>
+                                        <input type="date" name="tgl_akhir" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-filter"></i> Filter</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
                     <h4 class="card-title">Data Transaksi</h4>
                 </div>
                 <div class="card-content">
