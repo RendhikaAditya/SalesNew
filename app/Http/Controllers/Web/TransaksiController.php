@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Web;
 use App\Models\Order;
 // use App\Models\Detail_Order;
 // use App\Models\Detail_Order;
+use App\Models\Sales;
+use App\Models\Costumer;
 use App\Models\Detail_Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,8 +16,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 class TransaksiController extends Controller
 {
 
-    public function index()
-    {
+    public function getData() {
         $order = DB::table('order')->get();
 
         $order_detail = [];
@@ -53,6 +54,12 @@ class TransaksiController extends Controller
                 'status' => $ord->status
             ];
         }
+        return $order_detail;
+    }
+
+    public function index()
+    {
+
         // dd($order_detail);
         // $order = DB::table('detail_order')
         //     ->join('order', 'order.id_order', '=', 'detail_order.id_order')
@@ -66,8 +73,69 @@ class TransaksiController extends Controller
 
         // dd($order);
         // dd($order_detail);
+        $order_detail = $this->getData();
         return view("pages.supervisor.transaksi.index", compact("order_detail"));
     }
+
+    public function filter(Request $request) {
+        $costumer = $request->costumer;
+        $sales = $request->sales;
+        $tgl_awal = $request->tgl_awal;
+        $tgl_akhir = $request->tgl_akhir;
+        $order_detail = [];
+        // Tidak ada filter
+        if($costumer === null && $sales === null && $tgl_awal === null && $tgl_akhir === null) {
+            $order_detail = $this->getData();
+            // dd($order_detail);
+        } else if($costumer !== null && $sales === null && $tgl_awal === null && $tgl_akhir === null) {
+            $cc = Costumer::where("nama_costumer", "LIKE", '%'.$costumer.'%')->get();
+            foreach ($cc as $c) {
+                if(isset($c->order)) {
+                    foreach ($c->order as $o) {
+                        array_push($order_detail, [
+                            "total" => $o->detail_order->jml_barang,
+                            "customer" => $c->nama_costumer,
+                            "sales" => $o->sales->nama_sales,
+                            "harga" => $o->total_harga,
+                            "tgl_order" => $o->tgl_order,
+                            "id_order" => $o->id_order,
+                            "status" => $o->detail_order->status
+                        ]);
+                    }
+                }
+            }
+        } else if($sales !== null && $costumer === null && $tgl_akhir === null && $tgl_awal === null) {
+            $ss = Sales::where("nama_sales", "LIKE", "%".$sales."%")->get();
+            foreach ($ss as $s) {
+                foreach ($s->order as $o) {
+                    array_push($order_detail, [
+                        "total" => $o->detail_order->jml_barang,
+                        "customer" => $o->costumer->nama_costumer,
+                        "sales" => $o->sales->nama_sales,
+                        "harga" => $o->total_harga,
+                        "tgl_order" => $o->tgl_order,
+                        "id_order" => $o->id_order,
+                        "status" => $o->detail_order->status
+                    ]);
+                }
+            }
+        } else if($tgl_awal !== null && $tgl_akhir !== null) {
+            $order = Order::whereBetween("tgl_order", [$tgl_awal,$tgl_akhir])->get();
+            foreach ($order as $o) {
+                array_push($order_detail, [
+                    "total" => $o->detail_order->jml_barang,
+                    "customer" => $o->costumer->nama_costumer,
+                    "sales" => $o->sales->nama_sales,
+                    "harga" => $o->total_harga,
+                    "tgl_order" => $o->tgl_order,
+                    "id_order" => $o->id_order,
+                    "status" => $o->detail_order->status
+                ]);
+            }
+        }
+        // dd($order_detail);
+        return view("pages.supervisor.transaksi.index", compact("order_detail"));
+     }
 
     public function approve($o)
     {

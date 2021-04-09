@@ -70,6 +70,7 @@ Route::group(["middleware" => "auth"], function () {
         });
 
         Route::get('/transaksi', [TransaksiController::class, "index"])->name("adminListTransaksi");
+        Route::get('/filter-transaksi', [TransaksiController::class, "filter"])->name("filter_transaksi");
     });
 
     Route::group(["middleware" => "supervisor", "prefix" => "supervisor"], function () {
