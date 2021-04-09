@@ -77,8 +77,8 @@ Route::group(["middleware" => "auth"], function () {
 
         Route::group(["prefix" => "transaksi"], function () {
             Route::get("", [TransaksiController::class, "index"])->name("listTransaksi");
-            Route::get("/approve/{o[id_orders]}", [TransaksiController::class, "approve"])->name("approveTransaksi");
-            Route::get('/unapprove/{o[id_order]}', [TransaksiController::class, "unapprove"])->name("unapproveTransaksi");
+            Route::get("/approve/{o}", [TransaksiController::class, "approve"])->name("approveTransaksi");
+            Route::get('/unapprove/{o}', [TransaksiController::class, "unapprove"])->name("unapproveTransaksi");
         });
     });
 

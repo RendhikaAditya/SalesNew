@@ -65,26 +65,34 @@ class TransaksiController extends Controller
         //     ->get();
 
         // dd($order);
+        // dd($order_detail);
         return view("pages.supervisor.transaksi.index", compact("order_detail"));
     }
 
-    public function approve(Detail_Order $o)
+    public function approve($o)
     {
-
-        $edited = $o->update([
-            "status" => "1"
-        ]);
+        $detail_orders = Detail_Order::where("id_order",$o)->get();
+        $edited = null;
+        foreach ($detail_orders as $d) {
+            $edited = $d->update([
+                "status" => 1
+            ]);
+        }
         $edited === true
             ? Alert::success("Berhasil", "Transaksi Telah Disetujui")
             : Alert::error("Gagal", "Transaksi Gagal Dilakukan");
-        // return redirect()->back();
+        return redirect()->back();
     }
 
-    public function unapprove(Detail_Order $o)
+    public function unapprove($o)
     {
-        $edited = $o->update([
-            "status" => "0"
-        ]);
+        $edited = null;
+        $detail_orders = Detail_Order::where("id_order",$o)->get();
+        foreach ($detail_orders as $d) {
+            $edited = $d->update([
+                "status" => "0"
+            ]);
+        }
         $edited === true
             ? Alert::success("Berhasil", "Transaksi Telah Dibatalkan")
             : Alert::error("Gagal", "Transaksi Gagak Dibatalkan");
