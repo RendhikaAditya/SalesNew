@@ -16,7 +16,7 @@ class Costumer extends Model
         'targer_harga_costumer',
     ];
 
-    public function order() {
-        return $this->hasMany(Order::class, "id_costumer");
-    }
+    // public function order() {
+    //     return $this->hasMany(Order::class, "id_costumer");
+    // }
 }
