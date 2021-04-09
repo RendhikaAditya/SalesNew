@@ -17,6 +17,7 @@ class Order extends Model
         'id_sales',
         'total_harga',
         'tgl_order',
+        'bentuk_pembayaran'
     ];
 
     // public function detail_order()

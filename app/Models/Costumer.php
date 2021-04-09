@@ -14,6 +14,7 @@ class Costumer extends Model
         'nama_costumer',
         'alamat_costumer',
         'targer_harga_costumer',
+        'target_tercapai'
     ];
 
     public function order() {
