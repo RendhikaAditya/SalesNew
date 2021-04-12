@@ -29,6 +29,7 @@ class BarangController extends Controller
         $request->foto_barang === null ? "" : Storage::delete($b->foto_barang);
         $data = $request->all();
         $data["foto_barang"] = $filename;
+        $data['id_kategori'] = explode("-",$request->id_kategori)[0];
         $edited = $b->update($data);
         $edited === true
         ? Alert::success("Berhasil", "Update Data Berhasil Dilakukan")
@@ -45,6 +46,7 @@ class BarangController extends Controller
         $data = $request->all();
         $filename = $request->foto_barang !== null ? $request->file("foto_barang")->store("barang") : "Tidak Ada Foto";
         $data["foto_barang"] = $filename;
+        $data['id_kategori'] = explode("-",$request->id_kategori)[0];
         $created = Barang::create($data);
         $created->id_barang > 0
         ? Alert::success("Berhasil", "Data Berhasil Ditambahkan")

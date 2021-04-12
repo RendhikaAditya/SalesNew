@@ -15,23 +15,19 @@
                             <table class="table zero-configuration">
                                 <thead>
                                     <tr>
-                                        <th>Nama Kategori</th>
-                                        <th>Gambar</th>
+                                        <th>Bentuk Pembayaran</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($kategori as $k)
+                                    @foreach ($bentuk_pembayaran as $b)
                                         <tr>
-                                            <td>{{$k->nama_kategori}}</td>
-                                            <td style="width:50vh;">
-                                                <img class="w-50" src="/assets/images/{{$k->gambar}}" alt="Kategori">
-                                            </td>
+                                            <td>{{$b->bentuk_pembayaran}}</td>
                                             <td>
-                                                <a href="{{route("updateKategori",$k)}}" class="w-75 mx-auto d-block btn btn-primary btn-sm">
+                                                <a href="{{route("updatePembayaran",$b)}}" class="w-75 mx-auto d-block btn btn-primary btn-sm">
                                                     Update
                                                 </a>
-                                                <form class="mt-1" action="{{route("deleteKategori",$k)}}" method="post">
+                                                <form class="mt-1" action="{{route('deletePembayaran',$b)}}" method="post">
                                                     @method('delete')
                                                     @csrf
                                                     <button
@@ -44,8 +40,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Nama Kategori</th>
-                                        <th>Gambar</th>
+                                        <th>Bentuk Pembayaran</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </tfoot>

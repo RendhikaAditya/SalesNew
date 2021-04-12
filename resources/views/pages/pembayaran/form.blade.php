@@ -13,25 +13,19 @@
                                 <label for="email-id-icon">Nama Kategori</label>
                                 <div class="position-relative has-icon-left">
                                     <input
-                                    value="{{isset($k) ? $k->nama_kategori : old("nama_kategori")}}"
+                                    value="{{isset($b) ? $b->bentuk_pembayaran : old("bentuk_pembayaran")}}"
                                     type="text"
                                     id="email-id-icon"
-                                    class="form-control @error("nama_kategori") is-invalid @enderror"
-                                    name="nama_kategori"
-                                    placeholder="Nama Kategori">
+                                    class="form-control @error("bentuk_pembayaran") is-invalid @enderror"
+                                    name="bentuk_pembayaran"
+                                    placeholder="Bentuk Pembayaran">
                                     <div class="form-control-position">
                                         <i class="feather icon-list"></i>
                                     </div>
-                                    @error('nama_kategori')
+                                    @error('bentuk_pembayaran')
                                         <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="">Gambar Kategori</label>
-                                <input type="file" name="gambar" class="form-control">
                             </div>
                         </div>
                         <div class="col-12">

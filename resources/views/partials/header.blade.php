@@ -20,6 +20,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/extensions/tether-theme-arrows.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/extensions/tether.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/extensions/shepherd-theme-default.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     @stack('table-css')
     <!-- END: Vendor CSS-->
 
@@ -38,6 +39,10 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/pages/card-analytics.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/plugins/tour/tour.css">
     <!-- END: Page CSS-->
+
+    {{-- CKEDITOR --}}
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+    {{-- CKEDITOR --}}
 
     <!-- BEGIN: Custom CSS-->
     {{-- <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css"> --}}

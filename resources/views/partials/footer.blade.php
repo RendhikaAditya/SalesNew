@@ -1,5 +1,27 @@
   <!-- BEGIN: Vendor JS-->
   <script src="/assets/vendors/js/vendors.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script>
+      $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+  </script>
+  <script>
+    let kategori = document.getElementById("kategori");
+    let editor = document.getElementById("editor")
+
+    addEventListener("DOMContentLoaded", (e) => {
+        let nama_paket = kategori.value.split("-")[1];
+        nama_paket === "paket" ? editor.style.display="initial" : editor.style.display="none"
+    })
+
+    kategori.addEventListener("change", e => {
+        let nama_paket = e.target.value.split("-")[1];
+        nama_paket === "paket" ? editor.style.display="initial" : editor.style.display="none"
+     })
+
+  </script>
+  @stack('editor')
   <!-- BEGIN Vendor JS-->
 
   <!-- BEGIN: Page Vendor JS-->

@@ -69,6 +69,57 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="">Provinsi</label>
+                                <select class="form-control js-example-basic-single" name="id_provinsi">
+                                    <option value="" disabled selected>Pilih Provinsi</option>
+                                    <option
+                                    {{isset($c) ? "selected" : ""}}
+                                    value="{{$prov->id}}">{{$prov->provinsi}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="">Kabupaten / Kota</label>
+                                <select class="form-control js-example-basic-single" name="id_kota">
+                                    <option value="" disabled selected>Pilih Kabupaten / Kota</option>
+                                    @foreach ($kota as $k)
+                                        <option
+                                        {{isset($c) && $c->id_kota === $k->id ? "selected" : ""}}
+                                        value="{{$k->id}}">{{$k->kabupaten_kota}}</option>
+                                    @endforeach
+                                  </select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="">Kecamatan</label>
+                                <select class="form-control js-example-basic-single" name="id_kecamatan">
+                                    <option value="" disabled selected>Pilih Kecamatan</option>
+                                    @foreach ($kec as $kc)
+                                        <option
+                                        {{isset($c) && $c->id_kecamatan === $kc->id ? "selected" : ""}}
+                                        value="{{$kc->id}}">{{$kc->kecamatan}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="">Kelurahan</label>
+                                <select class="form-control js-example-basic-single" name="id_kelurahan">
+                                    <option value="" disabled selected>Pilih Kelurahan</option>
+                                    @foreach ($kelurahan as $kel)
+                                        <option
+                                        {{isset($c) && $c->id_kelurahan === $kel->id ? "selected" : ""}}
+                                        value="{{$kel->id}}">{{$kel->kelurahan}}</option>
+                                    @endforeach
+                                  </select>
+                            </div>
+                        </div>
+
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary mr-1 mb-1">Submit</button>
                         </div>

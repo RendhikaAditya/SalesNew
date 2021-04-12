@@ -17,6 +17,7 @@ class Barang extends Model
         'nama_barang',
         'harga_barang',
         'foto_barang',
+        'keterangan'
     ];
 
 

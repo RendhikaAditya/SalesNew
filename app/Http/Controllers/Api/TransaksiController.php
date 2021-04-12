@@ -49,7 +49,7 @@ class TransaksiController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 "code" => 500,
-                "pesan" => "Data Gagal Masuk Order",
+                "pesan" => $th->getMessage(),
                 "status" => "Gagal"
             ], 500);
         }
