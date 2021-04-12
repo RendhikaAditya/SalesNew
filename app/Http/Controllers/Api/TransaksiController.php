@@ -15,6 +15,7 @@ class TransaksiController extends Controller
     public function transaksi(Request $request)
     {
         try {
+            $jenis_bayar = $request->input('jenis_bayar');
             $keranjang = Keranjang::where("id_costumer", $request->id_costumer)->where("id_sales", $request->id_sales)->get();
             $total = 0;
             $idOrder = date("dmY") . "ORD" . date("His");
@@ -35,7 +36,8 @@ class TransaksiController extends Controller
                 "id_costumer" => $request->id_costumer,
                 "id_sales" => $request->id_sales,
                 "total_harga" => $total,
-                "tgl_order" => date("Y-m-d")
+                "tgl_order" => date("Y-m-d"),
+                "bentuk_pembayaran" => $jenis_bayar
             ]);
             return response()->json([
                 "code" => 200,
