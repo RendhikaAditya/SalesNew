@@ -18,6 +18,7 @@
                                         <th>Nama Barang</th>
                                         <th>Harga Barang</th>
                                         <th>Kategori Barang</th>
+                                        <th>Katerangan</th>
                                         <th>Foto Barang</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -29,6 +30,11 @@
                                             <td>{{number_format($b->harga_barang)}}</td>
                                             <td>
                                                 {{isset($b->kategori) ? $b->kategori->nama_kategori : "Tidak Ada Kategori"}}
+                                            </td>
+                                            <td>
+                                                {!!
+                                                    $b->keterangan !== null ? $b->keterangan : "Tidak Ada Ketarangan"
+                                                !!}
                                             </td>
                                             <td>
                                                 @if ($b->foto_barang === "Tidak Ada Foto" || $b->foto_barang === "null")
@@ -55,6 +61,7 @@
                                         <th>Nama Barang</th>
                                         <th>Harga Barang</th>
                                         <th>Kategori Barang</th>
+                                        <th>Katerangan</th>
                                         <th>Foto Barang</th>
                                         <th>Aksi</th>
                                     </tr>

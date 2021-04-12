@@ -53,4 +53,14 @@
             </li>
         </ul>
     </li>
+    <li class=" nav-item {{request()->is("admin/bentuk-pembayaran*") ? "active" : ""}}"><a href="#"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Ecommerce">Data Bentuk Pembayaran</span></a>
+        <ul class="menu-content">
+            <li>
+                <a href="{{route("listBentukPembayaran")}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Data Bentuk Pembayaran</span></a>
+            </li>
+            <li>
+                <a href="{{route("addPembayaran")}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Tambah Bentuk Pembayaran</span></a>
+            </li>
+        </ul>
+    </li>
 </ul>

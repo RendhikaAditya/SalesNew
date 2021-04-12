@@ -20,21 +20,21 @@ class Detail_Order extends Model
 
     public function order()
     {
-        return $this->belongsTo(Order::class, "id_order");
+        return $this->belongsTo(Order::class, "id_order", "id_order");
     }
 
-    // public function barang()
-    // {
-    //     return $this->belongsTo(Barang::class, "id_barang");
-    // }
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class, "id_barang");
+    }
 
     public function costomer()
     {
         return $this->belongsTo('App\Models\Costumer', 'id_costumer', 'id_costumer');
     }
 
-    public function barang()
-    {
-        return $this->belongsTo('App\Models\Detail_Order', 'id_barang', 'id_barang');
-    }
+    // public function barang()
+    // {
+    //     return $this->belongsTo('App\Models\Detail_Order', 'id_barang', 'id_barang');
+    // }
 }

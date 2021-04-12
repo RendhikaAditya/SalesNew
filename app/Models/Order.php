@@ -20,10 +20,10 @@ class Order extends Model
         'bentuk_pembayaran'
     ];
 
-    // public function detail_order()
-    // {
-    //     return $this->hasOne(Detail_Order::class, "id_order");
-    // }
+    public function detail_order()
+    {
+        return $this->hasMany(Detail_Order::class, "id_order", "id_order");
+    }
 
     // public function sales()
     // {
@@ -34,10 +34,11 @@ class Order extends Model
     // {
     //     return $this->BelongsTo(Costumer::class, "id_costumer");
     // }
-    public function detail_order()
-    {
-        return $this->belongsTo('App\Models\Detail_Order', 'id_order', 'id_order');
-    }
+
+    // public function detail_order()
+    // {
+    //     return $this->belongsTo('App\Models\Detail_Order', 'id_order', 'id_order');
+    // }
 
     public function costumer()
     {

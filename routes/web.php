@@ -7,6 +7,7 @@ use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\AdminController;
 use App\Http\Controllers\Web\SalesController;
 use App\Http\Controllers\Web\BarangController;
+use App\Http\Controllers\Web\BentukPembayaranController;
 use App\Http\Controllers\Web\CustomerController;
 use App\Http\Controllers\Web\KategoriController;
 use App\Http\Controllers\Web\SupervisorController;
@@ -69,10 +70,18 @@ Route::group(["middleware" => "auth"], function () {
             Route::post('/add', [UserController::class, "postAddUser"]);
         });
 
-        Route::get('/transaksi', [TransaksiController::class, "index"])->name("adminListTransaksi");
-        Route::get('/filter-transaksi', [TransaksiController::class, "filter"])->name("filter_transaksi");
-    });
+        Route::group(["prefix" => "bentuk-pembayaran"], function() {
+            Route::get('', [BentukPembayaranController::class, "index"])->name("listBentukPembayaran");
+            Route::get('/add', [BentukPembayaranController::class, "getAddPembayaran"])->name("addPembayaran");
+            Route::post('/add', [BentukPembayaranController::class, "postAddPembayaran"]);
+            Route::delete('/delete/{b:id}', [BentukPembayaranController::class, "deletePembayaran"])->name('deletePembayaran');
+            Route::get('/update/{b:id}', [BentukPembayaranController::class, "getPutPembayaran"])->name("updatePembayaran");
+            Route::put('/update/{b:id}', [BentukPembayaranController::class, "updatePutPembayaran"]);
+        });
 
+        Route::get('/transaksi', [TransaksiController::class, "index"])->name("adminListTransaksi");
+    });
+    Route::get('/filter-transaksi', [TransaksiController::class, "filter"])->name("filter_transaksi");
     Route::group(["middleware" => "supervisor", "prefix" => "supervisor"], function () {
         Route::get("", [SupervisorController::class, "index"])->name("supervisorIndex");
 
@@ -82,6 +91,9 @@ Route::group(["middleware" => "auth"], function () {
             Route::get('/unapprove/{o}', [TransaksiController::class, "unapprove"])->name("unapproveTransaksi");
         });
     });
+
+    Route::get('/detail-transaksi/{o}', [TransaksiController::class, "detail"])->name("detailOrder");
+    Route::post('/detail-transaksi/{o}', [TransaksiController::class, "prosesDetail"]);
 
     Route::get('/logout', function () {
         Auth::logout();

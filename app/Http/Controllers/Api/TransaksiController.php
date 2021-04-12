@@ -35,6 +35,7 @@ class TransaksiController extends Controller
                 "id_costumer" => $request->id_costumer,
                 "id_sales" => $request->id_sales,
                 "total_harga" => $total,
+                "bentuk_pembayaran" => $request->bentuk_pembayaran,
                 "tgl_order" => date("Y-m-d")
             ]);
             return response()->json([
@@ -45,7 +46,7 @@ class TransaksiController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 "code" => 500,
-                "pesan" => "Data Gagal Masuk Order",
+                "pesan" => $th->getMessage(),
                 "status" => "Gagal"
             ], 500);
         }

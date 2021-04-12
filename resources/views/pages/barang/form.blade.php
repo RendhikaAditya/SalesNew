@@ -28,6 +28,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div style="display: none" class="col-12" id="editor">
+                            <div class="form-group">
+                                <label for="">Keterangan Paket</label>
+                                <textarea name="keterangan">
+                                    {!! isset($b) ? $b->keterangan : "" !!}
+                                </textarea>
+                            </div>
+                        </div>
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="email-id-icon">Harga Barang</label>
@@ -52,12 +60,13 @@
                             <div class="form-group">
                                 <label for="password-icon">Kategori Barang</label>
                                 <div class="position-relative has-icon-left">
-                                    <select class="form-control" name="id_kategori">
+                                    <select id="kategori" class="form-control" name="id_kategori">
                                         <option value="#" disabled selected>Pilih Kategori Barang</option>
                                         @foreach ($kategori as $kt)
                                             <option
                                             {{isset($b) && $b->id_kategori === $kt->id_kategori ? "selected" : "" }}
-                                                value="{{$kt->id_kategori}}">{{$kt->nama_kategori}}
+                                                value="{{$kt->id_kategori.'-'.$kt->nama_kategori}}">
+                                                {{$kt->nama_kategori}}
                                             </option>
                                         @endforeach
                                     </select>
@@ -94,3 +103,9 @@
         </div>
     </div>
 </div>
+
+@push('editor')
+<script>
+    CKEDITOR.replace( 'keterangan' );
+</script>
+@endpush
