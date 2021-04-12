@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseFormatter;
 use App\Models\Order;
 use App\Models\Keranjang;
 use App\Models\Detail_Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Barang;
 use DB;
 
 class TransaksiController extends Controller
@@ -103,5 +105,35 @@ class TransaksiController extends Controller
 
         // // redirect ke riwayat
         // return redirect()->route('user.transaksiwaiting')->with('success', 'Transaksi Berhasil Dibatalkan!');
+    }
+
+    public function riwayatTransaksi(Request $request)
+    {
+
+
+        if ($request->has('id')) {
+            $ids = $request->input('id');
+            $barang = Order::select()
+                ->where('id_sales', '=',  $ids)
+                ->get();
+        } else {
+            $barang = Order::select()
+                ->get();
+        }
+
+        foreach ($barang as $i => $memu) {
+            $idORd = $memu['id_order'];
+            $data = Detail_Order::select()->where('id_order', '=', $idORd);
+            $num = $data->count();
+            $barang[$i]["jumlah"] = $num;
+        }
+
+        // dd($barang->toSql());
+
+        if ($barang) {
+            return ResponseFormatter::success($barang);
+        } else {
+            return ResponseFormatter::error(null, 404);
+        }
     }
 }
