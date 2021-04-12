@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseFormatter;
 use App\Models\Order;
 use App\Models\Keranjang;
 use App\Models\Detail_Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Barang;
 use DB;
 
 class TransaksiController extends Controller
@@ -15,6 +17,7 @@ class TransaksiController extends Controller
     public function transaksi(Request $request)
     {
         try {
+            $jenis_bayar = $request->input('jenis_bayar');
             $keranjang = Keranjang::where("id_costumer", $request->id_costumer)->where("id_sales", $request->id_sales)->get();
             $total = 0;
             $idOrder = date("dmY") . "ORD" . date("His");
@@ -35,8 +38,8 @@ class TransaksiController extends Controller
                 "id_costumer" => $request->id_costumer,
                 "id_sales" => $request->id_sales,
                 "total_harga" => $total,
-                "bentuk_pembayaran" => $request->bentuk_pembayaran,
-                "tgl_order" => date("Y-m-d")
+                "tgl_order" => date("Y-m-d"),
+                "bentuk_pembayaran" => $jenis_bayar
             ]);
             return response()->json([
                 "code" => 200,
@@ -102,5 +105,35 @@ class TransaksiController extends Controller
 
         // // redirect ke riwayat
         // return redirect()->route('user.transaksiwaiting')->with('success', 'Transaksi Berhasil Dibatalkan!');
+    }
+
+    public function riwayatTransaksi(Request $request)
+    {
+
+
+        if ($request->has('id')) {
+            $ids = $request->input('id');
+            $barang = Order::select()
+                ->where('id_sales', '=',  $ids)
+                ->get();
+        } else {
+            $barang = Order::select()
+                ->get();
+        }
+
+        foreach ($barang as $i => $memu) {
+            $idORd = $memu['id_order'];
+            $data = Detail_Order::select()->where('id_order', '=', $idORd);
+            $num = $data->count();
+            $barang[$i]["jumlah"] = $num;
+        }
+
+        // dd($barang->toSql());
+
+        if ($barang) {
+            return ResponseFormatter::success($barang);
+        } else {
+            return ResponseFormatter::error(null, 404);
+        }
     }
 }
