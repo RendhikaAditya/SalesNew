@@ -20,7 +20,7 @@ class admin
         if (Auth::user()->id_level === 1) {
             return $next($request);
         } else {
-            return redirect()->back();
+            abort(403, "Anda Tidak Bisa Mengakses Halaman Ini !!!!");
         }
     }
 }
