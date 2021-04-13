@@ -20,7 +20,7 @@ class supervisor
         if (Auth::user()->id_level === 2) {
             return $next($request);
         } else {
-            return redirect()->back();
+            abort(403, "Anda Tidak Bisa Mengakses Halaman Ini !!!!");
         }
     }
 }
