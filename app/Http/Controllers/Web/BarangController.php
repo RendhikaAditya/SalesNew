@@ -14,53 +14,58 @@ use App\Http\Requests\Barang\UpdateBarangRequest;
 class BarangController extends Controller
 {
 
-    public function index() {
+    public function index()
+    {
         $barang = Barang::get();
-        return view("pages.barang.index",compact("barang"));
+        return view("pages.barang.index", compact("barang"));
     }
 
-    public function getUpdateBarang(Barang $b) {
+    public function getUpdateBarang(Barang $b)
+    {
         $kategori = Kategori::get();
-        return view("pages.barang.update",compact("b", "kategori"));
+        return view("pages.barang.update", compact("b", "kategori"));
     }
 
-    public function putUpdateBarang(UpdateBarangRequest $request, Barang $b) {
+    public function putUpdateBarang(UpdateBarangRequest $request, Barang $b)
+    {
         $filename = $request->foto_barang === null ? $b->foto_barang : $request->file("foto_barang")->store("barang");
         $request->foto_barang === null ? "" : Storage::delete($b->foto_barang);
         $data = $request->all();
         $data["foto_barang"] = $filename;
-        $data['id_kategori'] = explode("-",$request->id_kategori)[0];
+        $data['id_kategori'] = explode("-", $request->id_kategori)[0];
         $edited = $b->update($data);
         $edited === true
-        ? Alert::success("Berhasil", "Update Data Berhasil Dilakukan")
-        : Alert::error("Gagal", "Update Data Gagal Dilakukan");
+            ? Alert::success("Berhasil", "Update Data Berhasil Dilakukan")
+            : Alert::error("Gagal", "Update Data Gagal Dilakukan");
         return redirect()->route("listBarang");
     }
 
-    public function getAddBarang() {
+    public function getAddBarang()
+    {
         $kategori = Kategori::get();
-        return view("pages.barang.add",compact("kategori"));
+        return view("pages.barang.add", compact("kategori"));
     }
 
-    public function postAddBarang(UpdateBarangRequest $request) {
+    public function postAddBarang(UpdateBarangRequest $request)
+    {
         $data = $request->all();
-        $filename = $request->foto_barang !== null ? $request->file("foto_barang")->store("barang") : "Tidak Ada Foto";
+        $filename = $request->foto_barang !== null ? $request->file("foto_barang")->store("barang") : "null";
         $data["foto_barang"] = $filename;
-        $data['id_kategori'] = explode("-",$request->id_kategori)[0];
+        $data['id_kategori'] = explode("-", $request->id_kategori)[0];
         $created = Barang::create($data);
         $created->id_barang > 0
-        ? Alert::success("Berhasil", "Data Berhasil Ditambahkan")
-        : Alert::error("Gagal", "Data Gagal Ditambahkan");
+            ? Alert::success("Berhasil", "Data Berhasil Ditambahkan")
+            : Alert::error("Gagal", "Data Gagal Ditambahkan");
         return redirect()->route("listBarang");
     }
 
-    public function deleteBarang(Barang $b) {
-        $b->foto_barang !== null && $b->foto_barang !== "Tidak Ada Foto" ? Storage::delete($b->foto_barang) : "";
+    public function deleteBarang(Barang $b)
+    {
+        $b->foto_barang !== null && $b->foto_barang !== "null" ? Storage::delete($b->foto_barang) : "";
         $deleted = $b->delete();
         $deleted === true
-        ? Alert::success("Berhasil", "Data Berhasil Dihapus")
-        : Alert::error("Gagal", "Data Gagal Dihapus");
+            ? Alert::success("Berhasil", "Data Berhasil Dihapus")
+            : Alert::error("Gagal", "Data Gagal Dihapus");
         return redirect()->back();
     }
-
 }

@@ -115,9 +115,11 @@ class TransaksiController extends Controller
             $ids = $request->input('id');
             $barang = Order::select()
                 ->where('id_sales', '=',  $ids)
+                ->leftJoin('costumer', 'costumer.id_costumer', 'order.id_costumer')
                 ->get();
         } else {
             $barang = Order::select()
+                ->leftJoin('costumer', 'costumer.id_costumer', 'order.id_costumer')
                 ->get();
         }
 
@@ -129,6 +131,32 @@ class TransaksiController extends Controller
         }
 
         // dd($barang->toSql());
+
+        if ($barang) {
+            return ResponseFormatter::success($barang);
+        } else {
+            return ResponseFormatter::error(null, 404);
+        }
+    }
+
+    public function barangRiwayat(Request $request)
+    {
+
+        $ids = $request->input('id');
+        $barang = Detail_Order::select()
+            ->where('id_order', '=',  $ids)
+            ->leftJoin('barang', 'barang.id_barang', 'detail_order.id_barang')
+            ->get();
+
+
+        // foreach ($barang as $i => $memu) {
+        //     $idORd = $memu['id_order'];
+        //     $data = Detail_Order::select()->where('id_order', '=', $idORd);
+        //     $num = $data->count();
+        //     $barang[$i]["jumlah"] = $num;
+        // }
+
+        // dd($barang);
 
         if ($barang) {
             return ResponseFormatter::success($barang);

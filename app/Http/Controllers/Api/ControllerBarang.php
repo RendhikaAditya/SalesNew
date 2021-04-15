@@ -59,7 +59,7 @@ class ControllerBarang extends Controller
         //             return $join1;
         //         }
         //     );
-        $barang = Barang::select('barang.id_barang', 'barang.nama_barang', 'barang.harga_barang', 'kategori.id_kategori', 'keranjang.jml_barang', 'keranjang.id_costumer', 'barang.foto_barang', 'keranjang.harga AS hargaSementara');
+        $barang = Barang::select('barang.id_barang', 'barang.nama_barang', 'barang.keterangan', 'barang.harga_barang', 'kategori.id_kategori', 'keranjang.jml_barang', 'keranjang.id_costumer', 'barang.foto_barang', 'keranjang.harga AS hargaSementara');
         $barang->leftJoin(
             'kategori',
             function ($join) {
