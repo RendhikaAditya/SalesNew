@@ -13,7 +13,7 @@
                                 <label for="first-name-icon">Nama Sales</label>
                                 <div class="position-relative has-icon-left">
                                     <input
-                                    value="{{isset($s) ? $s->nama_sales : old("nama_sales")}}"
+                                    value="{{isset($data) ? $data->nama_sales : old("nama_sales")}}"
                                     type="text"
                                     id="first-name-icon"
                                     class="form-control @error("nama_sales") is-invalid @enderror"
@@ -33,7 +33,7 @@
                                 <label for="email-id-icon">Alamat Sales</label>
                                 <div class="position-relative has-icon-left">
                                     <input
-                                    value="{{isset($s) ? $s->alamat_sales : old("alamat_sales")}}"
+                                    value="{{isset($data) ? $data->alamat_sales : old("alamat_sales")}}"
                                     type="text"
                                     id="email-id-icon"
                                     class="form-control @error("alamat_sales") is-invalid @enderror"
@@ -50,19 +50,16 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="contact-info-icon">Umur Sales</label>
+                                <label for="contact-info-icon">No.Telpon Sales</label>
                                 <div class="position-relative has-icon-left">
                                     <input
-                                    value="{{isset($s) ? $s->umur_sales : old("umur_sales")}}"
-                                    type="number"
-                                    id="contact-info-icon"
-                                    class="form-control @error("umur_sales") is-invalid @enderror"
-                                    name="umur_sales"
-                                    placeholder="Umur Sales">
+                                    value="{{isset($data) ? $data->nohp : ""}}"
+                                    type="number" name="nohp" class="form-control @error("nohp") is-invalid @enderror"
+                                    placeholder="No.Telpon Sales" required>
                                     <div class="form-control-position">
                                         <i class="feather icon-smartphone"></i>
                                     </div>
-                                    @error('umur_sales')
+                                    @error('nohp')
                                         <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
@@ -75,12 +72,12 @@
                                     <select class="form-control" name="gender_sales">
                                         <option value="#" disabled selected>Pilih Gender Sales</option>
                                         <option
-                                        {{isset($s) && $s->gender_sales === "Laki - Laki" ? "selected" :""}}
+                                        {{isset($data) && $data->gender_sales === "Laki - Laki" ? "selected" :""}}
                                         value="Laki - Laki">
                                         Laki - Laki
                                         </option>
                                         <option
-                                        {{isset($s) && $s->gender_sales === "Perempuan" ? "selected" :""}}
+                                        {{isset($data) && $data->gender_sales === "Perempuan" ? "selected" :""}}
                                         value="Perempuan">Perempuan</option>
                                     </select>
                                     <div class="form-control-position">
@@ -94,7 +91,7 @@
                                 <label for="contact-info-icon">Username</label>
                                 <div class="position-relative has-icon-left">
                                     <input
-                                    value="{{isset($s) ? $s->username : old("username") }}"
+                                    value="{{isset($data) ? $data->username : old("username") }}"
                                     type="text"
                                     id="contact-info-icon"
                                     class="form-control @error("username") is-invalid @enderror"
@@ -109,7 +106,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if (!isset($s))
+                        @if (!isset($data))
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="contact-info-icon">Password</label>
@@ -129,7 +126,7 @@
                                 </div>
                             </div>
                         @endif
-                        <div class="col-3">
+                        <div class="col-12">
                             <div class="form-group">
                                 <label for="">Provinsi</label>
                                 <select class="form-control js-example-basic-single" name="id_provinsi">
@@ -138,35 +135,18 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-12">
                             <div class="form-group">
                                 <label for="">Kabupaten / Kota</label>
-                                <select class="form-control js-example-basic-single" name="id_kota">
-                                    <option value="" disabled selected>Pilih Kabupaten / Kota</option>
-                                    @foreach ($kota as $k)
+                                <select class="form-control js-example-basic-multiple" name="id_kota[]" multiple="multiple">
+                                    @foreach ($kota as $no => $k)
+                                    @isset($id_kota)
+                                        <option
+                                        {{array_search("$k->id", $id_kota) !== false ? "selected" : ""}}
+                                        value="{{$k->id}}">{{$k->kabupaten_kota}}</option>
+                                    @else
                                         <option value="{{$k->id}}">{{$k->kabupaten_kota}}</option>
-                                    @endforeach
-                                  </select>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="">Kecamatan</label>
-                                <select class="form-control js-example-basic-single" name="id_kecamatan">
-                                    <option value="" disabled selected>Pilih Kecamatan</option>
-                                    @foreach ($kec as $kc)
-                                        <option value="{{$kc->id}}">{{$kc->kecamatan}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="">Kelurahan</label>
-                                <select class="form-control js-example-basic-single" name="id_kelurahan">
-                                    <option value="" disabled selected>Pilih Kelurahan</option>
-                                    @foreach ($kelurahan as $kel)
-                                        <option value="{{$kel->id}}">{{$kel->kelurahan}}</option>
+                                    @endisset
                                     @endforeach
                                   </select>
                             </div>

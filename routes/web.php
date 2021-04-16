@@ -3,16 +3,18 @@
 use App\Models\Barang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\Web\AuthController;
+use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\AdminController;
 use App\Http\Controllers\Web\SalesController;
 use App\Http\Controllers\Web\BarangController;
-use App\Http\Controllers\Web\BentukPembayaranController;
 use App\Http\Controllers\Web\CustomerController;
 use App\Http\Controllers\Web\KategoriController;
-use App\Http\Controllers\Web\SupervisorController;
 use App\Http\Controllers\Web\TransaksiController;
-use App\Http\Controllers\Web\UserController;
+use App\Http\Controllers\Web\SupervisorController;
+use App\Http\Controllers\Web\BentukPembayaranController;
+
 
 Route::group(["middleware" => "guest"], function () {
     Route::get('/', [AuthController::class, 'getLogin'])->name("login");
@@ -27,9 +29,9 @@ Route::group(["middleware" => "auth"], function () {
 
         Route::group(["prefix" => "sales"], function () {
             Route::get("", [SalesController::class, "index"])->name("listSales");
-            Route::get("/update/{s:id_sales}", [SalesController::class, 'getUpdateSales'])->name("updateSales");
-            Route::put("/update/{s:id_sales}", [SalesController::class, "putUpdateSales"]);
-            Route::delete("/delete/{s:id_sales}", [SalesController::class, 'deleteSales'])->name("deleteSales");
+            Route::get("/update/{s}", [SalesController::class, 'getUpdateSales'])->name("updateSales");
+            Route::put("/update/{s}", [SalesController::class, "putUpdateSales"]);
+            Route::delete("/delete/{s}", [SalesController::class, 'deleteSales'])->name("deleteSales");
             Route::get('/add', [SalesController::class, 'getAddSales'])->name("addSales");
             Route::post('/add', [SalesController::class, 'postAddSales']);
         });
@@ -82,6 +84,7 @@ Route::group(["middleware" => "auth"], function () {
         Route::get('/transaksi', [TransaksiController::class, "index"])->name("adminListTransaksi");
     });
     Route::get('/filter-transaksi', [TransaksiController::class, "filter"])->name("filter_transaksi");
+    Route::get('/laporan-transaksi', [TransaksiController::class, "laporan"])->name("generateLaporan");
     Route::group(["middleware" => "supervisor", "prefix" => "supervisor"], function () {
         Route::get("", [SupervisorController::class, "index"])->name("supervisorIndex");
 

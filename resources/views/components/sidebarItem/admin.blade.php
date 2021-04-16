@@ -1,12 +1,12 @@
 <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-    <li class=" nav-item"><a href="index.html"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span><span class="badge badge badge-warning badge-pill float-right mr-2">2</span></a>
+
+    <li class=" nav-item {{request()->is("admin/transaksi*") || request()->is("admin") || request()->is("detail-transaksi*") ? "active" : ""}}"><a href="#"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Ecommerce">Dashboard</span></a>
         <ul class="menu-content">
-            <li class=""><a href="dashboard-analytics.html"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Analytics">Analytics</span></a>
-            </li>
-            <li><a href="dashboard-ecommerce.html"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="eCommerce">eCommerce</span></a>
+            <li><a href="{{route("adminIndex")}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Data Transaksi</span></a>
             </li>
         </ul>
     </li>
+
     <li class=" nav-item {{request()->is("admin/sales*") ? "active" : ""}}"><a href="#"><i class="feather icon-users"></i><span class="menu-title" data-i18n="Ecommerce">Data Sales</span></a>
         <ul class="menu-content">
             <li><a href="{{route("listSales")}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Sales</span></a>
@@ -44,12 +44,6 @@
             <li><a href="{{route("listKategori")}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Kategori</span></a>
             </li>
             <li><a href="{{route("addKategori")}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Tambah Kategori</span></a>
-            </li>
-        </ul>
-    </li>
-    <li class=" nav-item {{request()->is("admin/transaksi*") ? "active" : ""}}"><a href="#"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Ecommerce">Data Transaksi</span></a>
-        <ul class="menu-content">
-            <li><a href="{{route("adminListTransaksi")}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Data Transaksi</span></a>
             </li>
         </ul>
     </li>

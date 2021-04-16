@@ -15,28 +15,30 @@
                             <table class="table zero-configuration">
                                 <thead>
                                     <tr>
+                                        <th>QR</th>
                                         <th>Nama Costumer</th>
                                         <th>Alamat Costumer</th>
                                         <th>Target Harga Costumer</th>
                                         <th>Target Harga Tercapai</th>
                                         <th>Provinsi</th>
                                         <th>Kota</th>
-                                        <th>Kecamatan</th>
-                                        <th>Kelurahan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($costumer as $c)
                                         <tr>
+                                            <td>
+                                                {{
+                                                    \QrCode::size(75)->generate($c->nama_costumer)
+                                                }}
+                                            </td>
                                             <td>{{$c->nama_costumer}}</td>
                                             <td>{{$c->alamat_costumer}}</td>
                                             <td>{{number_format($c->targer_harga_costumer)}}</td>
-                                            <td>{{number_format($c->target_tercapat)}}</td>
+                                            <td>{{number_format($c->target_tercapai)}}</td>
                                             <td>{{$c->provinsi->provinsi}}</td>
                                             <td>{{$c->kota->kabupaten_kota}}</td>
-                                            <td>{{$c->kecamatan->kecamatan}}</td>
-                                            <td>{{$c->kelurahan->kelurahan}}</td>
                                             <td>
                                                 <a href="{{route("updateCostumer",$c)}}" class="w-100 btn btn-primary btn-sm">Update</a>
                                                 <form class="mt-1" action="{{route("deleteCostumer",$c)}}" method="post">
@@ -54,14 +56,13 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
+                                        <th>QR</th>
                                         <th>Nama Costumer</th>
                                         <th>Alamat Costumer</th>
                                         <th>Target Harga Costumer</th>
                                         <th>Target Harga Tercapai</th>
                                         <th>Provinsi</th>
                                         <th>Kota</th>
-                                        <th>Kecamatan</th>
-                                        <th>Kelurahan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </tfoot>

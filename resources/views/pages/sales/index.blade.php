@@ -15,33 +15,35 @@
                             <table class="table zero-configuration">
                                 <thead>
                                     <tr>
+                                        <th>No.Telpon</th>
                                         <th>Username</th>
                                         <th>Nama Sales</th>
                                         <th>Alamat Sales</th>
-                                        <th>Umur Sales</th>
                                         <th>Jenis Kelamin</th>
                                         <th>Provinsi</th>
                                         <th>Kota</th>
-                                        <th>Kecamatan</th>
-                                        <th>Kelurahan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($sales as $s)
+                                    @foreach ($data as $s)
                                         <tr>
-                                            <td>{{$s->username}}</td>
-                                            <td>{{$s->nama_sales}}</td>
-                                            <td>{{$s->alamat_sales}}</td>
-                                            <td>{{$s->umur_sales}}</td>
-                                            <td>{{$s->gender_sales}}</td>
-                                            <td>{{$s->provinsi->provinsi}}</td>
-                                            <td>{{$s->kota->kabupaten_kota}}</td>
-                                            <td>{{$s->kecamatan->kecamatan}}</td>
-                                            <td>{{$s->kelurahan->kelurahan}}</td>
+                                            <td>{{$s['nohp']}}</td>
+                                            <td>{{$s['username']}}</td>
+                                            <td>{{$s["nama_sales"]}}</td>
+                                            <td>{{$s["alamat_sales"]}}</td>
+                                            <td>{{$s["gender_sales"]}}</td>
+                                            <td>{{$s["provinsi"]}}</td>
                                             <td>
-                                                <a href="{{route("updateSales",$s)}}" class="w-100 btn btn-primary btn-sm">Update</a>
-                                                <form class="mt-1" action="{{route("deleteSales",$s)}}" method="post">
+                                                <ul style="font-size: 2vh">
+                                                    @foreach ($s['kota'] as $k)
+                                                        <li>{{$k}}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <a href="{{route("updateSales",$s['id'])}}" class="w-100 btn btn-primary btn-sm">Update</a>
+                                                <form class="mt-1" action="{{route("deleteSales",$s['id'])}}" method="post">
                                                     @csrf
                                                     @method("delete")
                                                     <button
@@ -54,15 +56,13 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
+                                        <th>No.Telpon</th>
                                         <th>Username</th>
                                         <th>Nama Sales</th>
                                         <th>Alamat Sales</th>
-                                        <th>Umur Sales</th>
                                         <th>Jenis Kelamin</th>
                                         <th>Provinsi</th>
                                         <th>Kota</th>
-                                        <th>Kecamatan</th>
-                                        <th>Kelurahan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </tfoot>

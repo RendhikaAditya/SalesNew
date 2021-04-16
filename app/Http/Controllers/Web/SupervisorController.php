@@ -9,7 +9,8 @@ class SupervisorController extends Controller
 {
 
     public function index() {
-        return view("pages.supervisor.index");
+        $transaksi = new TransaksiController();
+        return $transaksi->index();
     }
 
 }

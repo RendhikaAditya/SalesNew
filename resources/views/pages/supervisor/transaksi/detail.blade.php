@@ -6,10 +6,63 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Filter Data Transaksi</h4>
+                    <h4 class="card-title">Detail Transaksi</h4>
                 </div>
                 <div class="card-content">
                     <div class="card-body card-dashboard">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Nama Costumer</label>
+                                    <input type="text" value="{{$detail[0]->order->costumer->nama_costumer}}" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Nama Sales</label>
+                                    <input type="text" value="{{$detail[0]->order->sales->nama_sales}}" class="form-control" disabled>
+                                </div>
+                            </div>
+                            {{-- <div class="col-md-4"></div> --}}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Alamat Costumer</label>
+                                    <input type="text" value="{{
+                                        $detail[0]->order->costumer->provinsi->provinsi.", ".
+                                        $detail[0]->order->costumer->kota->kabupaten_kota.", ".
+                                        $detail[0]->order->costumer->kecamatan->kecamatan.", ".
+                                        $detail[0]->order->costumer->kelurahan->kelurahan." "
+                                    }}" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Alamat Sales</label>
+                                    <input type="text" value="{{
+                                        $detail[0]->order->sales->provinsi->provinsi.", ".
+                                        $detail[0]->order->sales->kota->kabupaten_kota.", ".
+                                        $detail[0]->order->sales->kecamatan->kecamatan.", ".
+                                        $detail[0]->order->sales->kelurahan->kelurahan." "
+                                    }}" class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Total Jumlah Barang</label>
+                                    <input type="number" class="form-control" value="{{$detail->sum('jml_barang')}}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Total Jumlah Harga</label>
+                                    <input type="number" class="form-control" value="{{$detail[0]->order->total_harga}}" disabled>
+                                </div>
+                            </div>
+                        </div>
                         <form action="{{route("detailOrder",$o)}}" method="post">
                             @csrf
                             @foreach ($detail as $d)
