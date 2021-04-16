@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Exports\LaporanTransaksi;
 use App\Models\Order;
 // use App\Models\Detail_Order;
 // use App\Models\Detail_Order;
@@ -11,13 +12,15 @@ use App\Models\Detail_Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\LaporanTransaksi as ModelsLaporanTransaksi;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class TransaksiController extends Controller
 {
 
     public function getData() {
-        $order = Order::get();
+        $order = Order::orderBy('id','desc')->get();
         return $order;
     }
 
@@ -124,6 +127,26 @@ class TransaksiController extends Controller
         return redirect()->route("listTransaksi");
     }
 
+    public function download() {
+        return Excel::download(new LaporanTransaksi, "laporan-transaksi.xlsx");
 
+    }
+
+    public function laporan() {
+        $detail_order = Detail_Order::where("status",1)->orderBy('id', 'desc')->get();
+        ModelsLaporanTransaksi::truncate();
+        foreach ($detail_order as $d) {
+           DB::table('laporan_transaksis')->insert([
+                "id_order" => $d->id_order,
+                "nama_barang" => $d->barang->nama_barang,
+                "nama_costumer" => $d->order->costumer->nama_costumer,
+                "nama_sales" => $d->order->sales->nama_sales,
+                "jml_barang" => $d->jml_barang,
+                "tgl_order" => $d->order->tgl_order,
+                "status" => "Dikonfirmasi"
+            ]);
+        }
+       return $this->download();
+    }
 
 }

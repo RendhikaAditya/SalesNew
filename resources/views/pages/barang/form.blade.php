@@ -31,7 +31,7 @@
                         <div style="display: none" class="col-12" id="editor">
                             <div class="form-group">
                                 <label for="">Keterangan Paket</label>
-                                <textarea name="keterangan">
+                                <textarea name="keterangan" class="form-control" rows="5">
                                     {!! isset($b) ? $b->keterangan : "" !!}
                                 </textarea>
                             </div>
@@ -104,8 +104,8 @@
     </div>
 </div>
 
-@push('editor')
-<script>
-    CKEDITOR.replace( 'keterangan' );
-</script>
-@endpush
+{{-- @push('editor') --}}
+{{-- <script> --}}
+    {{-- CKEDITOR.replace( 'keterangan' ); --}}
+{{-- </script> --}}
+{{-- @endpush --}}

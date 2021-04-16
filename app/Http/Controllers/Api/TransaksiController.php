@@ -20,7 +20,7 @@ class TransaksiController extends Controller
             $jenis_bayar = $request->input('jenis_bayar');
             $keranjang = Keranjang::where("id_costumer", $request->id_costumer)->where("id_sales", $request->id_sales)->get();
             $total = 0;
-            $idOrder = date("dmY") . "ORD" . date("His");
+            $idOrder = date("dmY") . "ORD" . rand(0,rand() * 100);
             foreach ($keranjang as $k) {
                 // return response()->json($order->id_order);
                 $detail = Detail_Order::create([

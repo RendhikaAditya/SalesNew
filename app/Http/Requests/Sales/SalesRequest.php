@@ -26,7 +26,7 @@ class SalesRequest extends FormRequest
         return [
             "nama_sales" => ["required"],
             "alamat_sales" => ["required"],
-            "umur_sales" => ["required"],
+            "nohp" => ["required"],
             "gender_sales" => ["required"],
             "username" => ["required"],
         ];
