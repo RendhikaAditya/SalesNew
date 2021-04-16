@@ -37,6 +37,7 @@ Route::post("/costumer/get", [ControllerCostumer::class, 'getCostumer']);
 Route::post("/sales/login", [ControllerSales::class, 'login']);
 Route::post("/riwayat", [TransaksiController::class, 'riwayatTransaksi']);
 Route::get("/riwayatBarang", [TransaksiController::class, 'barangRiwayat']);
+Route::get("/bentukBayar", [TransaksiController::class, 'bentukBayar']);
 
 // Route::post("/barang", [ContollerBarang::class, 'all']);
 // Route::get("/kategori", [ContollerBarang::class, 'kategori']);

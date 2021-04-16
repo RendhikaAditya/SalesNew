@@ -9,6 +9,7 @@ use App\Models\Detail_Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
+use App\Models\BentukPembayaran;
 use DB;
 
 class TransaksiController extends Controller
@@ -116,10 +117,12 @@ class TransaksiController extends Controller
             $barang = Order::select()
                 ->where('id_sales', '=',  $ids)
                 ->leftJoin('costumer', 'costumer.id_costumer', 'order.id_costumer')
+                ->orderBy('order.id', 'DESC')
                 ->get();
         } else {
             $barang = Order::select()
                 ->leftJoin('costumer', 'costumer.id_costumer', 'order.id_costumer')
+                ->orderBy('order.id', 'DESC')
                 ->get();
         }
 
@@ -146,6 +149,7 @@ class TransaksiController extends Controller
         $barang = Detail_Order::select()
             ->where('id_order', '=',  $ids)
             ->leftJoin('barang', 'barang.id_barang', 'detail_order.id_barang')
+            ->orderBy('id', 'DESC')
             ->get();
 
 
@@ -160,6 +164,17 @@ class TransaksiController extends Controller
 
         if ($barang) {
             return ResponseFormatter::success($barang);
+        } else {
+            return ResponseFormatter::error(null, 404);
+        }
+    }
+
+    public function bentukBayar()
+    {
+        $bayar = BentukPembayaran::get();
+
+        if ($bayar) {
+            return ResponseFormatter::success($bayar);
         } else {
             return ResponseFormatter::error(null, 404);
         }
