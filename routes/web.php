@@ -83,8 +83,12 @@ Route::group(["middleware" => "auth"], function () {
 
         Route::get('/transaksi', [TransaksiController::class, "index"])->name("adminListTransaksi");
     });
+
     Route::get('/filter-transaksi', [TransaksiController::class, "filter"])->name("filter_transaksi");
     Route::get('/laporan-transaksi', [TransaksiController::class, "laporan"])->name("generateLaporan");
+    Route::get('/detail-transaksi/{o}', [TransaksiController::class, "detail"])->name("detailOrder");
+    Route::post('/detail-transaksi/{o}', [TransaksiController::class, "prosesDetail"]);
+
     Route::group(["middleware" => "supervisor", "prefix" => "supervisor"], function () {
         Route::get("", [SupervisorController::class, "index"])->name("supervisorIndex");
 
@@ -92,11 +96,11 @@ Route::group(["middleware" => "auth"], function () {
             Route::get("", [TransaksiController::class, "index"])->name("listTransaksi");
             Route::get("/approve/{o}", [TransaksiController::class, "approve"])->name("approveTransaksi");
             Route::get('/unapprove/{o}', [TransaksiController::class, "unapprove"])->name("unapproveTransaksi");
+            Route::get('/hapus-transaksi/{o}', [TransaksiController::class, "deleteTransaksi"])->name("deleteTransaksi");
         });
     });
 
-    Route::get('/detail-transaksi/{o}', [TransaksiController::class, "detail"])->name("detailOrder");
-    Route::post('/detail-transaksi/{o}', [TransaksiController::class, "prosesDetail"]);
+
 
     Route::get('/logout', function () {
         Auth::logout();

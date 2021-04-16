@@ -50,8 +50,16 @@
                                             </td>
                                             @if (Auth::user()->id_level == "2")
                                                 <td>
-                                                    <a href="{{route("unapproveTransaksi",$o['id_order'])}}" class="w-100 btn btn-primary btn-sm">Unapprove</a>
-                                                    {{-- <a href="" class="btn btn-primary btn-sm">Tidak Approve</a> --}}
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <a href="{{route("unapproveTransaksi",$o['id_order'])}}" class="btn btn-primary btn-sm"><i class="fa fa-times"></i></a>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <a href="{{route("deleteTransaksi",$o['id_order'])}}" class="btn btn-sm btn-danger">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             @endif
                                         </tr>
@@ -131,13 +139,16 @@
                                             </td>
                                             @if (Auth::user()->id_level == "2")
                                                 <td>
-                                                    {{-- {{dd($o)}} --}}
-                                                    {{-- @if ($o->detail_order[0]->status == "0") --}}
-                                                        <a href="{{route("approveTransaksi",$o['id_order'])}}" class="w-100 btn btn-primary btn-sm">Approve</a>
-                                                    {{-- @else --}}
-                                                        {{-- <a href="{{route("unapproveTransaksi",$o['id_order'])}}" class="w-100 btn btn-primary btn-sm">Unapprove</a> --}}
-                                                    {{-- @endif --}}
-                                                    {{-- <a href="" class="btn btn-primary btn-sm">Tidak Approve</a> --}}
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <a href="{{route("approveTransaksi",$o['id_order'])}}" class="btn btn-primary btn-sm"><i class="fa fa-check"></i></a>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <a href="{{route("deleteTransaksi",$o['id_order'])}}" class="btn btn-sm btn-danger">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             @endif
                                         </tr>

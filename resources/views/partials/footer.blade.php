@@ -59,6 +59,15 @@
     }
   </script>
 
+  <script>
+      let page = window.location.pathname;
+        if (page === "/laporan-transaksi") {
+            setTimeout(() => {
+                window.location.href="/admin"
+            }, 3500);
+        }
+    </script>
+
 </body>
 <!-- END: Body-->
 

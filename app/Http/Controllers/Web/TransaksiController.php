@@ -129,7 +129,6 @@ class TransaksiController extends Controller
 
     public function download() {
         return Excel::download(new LaporanTransaksi, "laporan-transaksi.xlsx");
-
     }
 
     public function laporan() {
@@ -147,6 +146,13 @@ class TransaksiController extends Controller
             ]);
         }
        return $this->download();
+    }
+
+    public function deleteTransaksi($o) {
+        DB::table('detail_order')->where('id_order',$o)->delete();
+        DB::table('order')->where('id_order',$o)->delete();
+        Alert::success("Berhasil", "Data Transaksi Berhasil Diupdate");
+        return redirect()->back();
     }
 
 }

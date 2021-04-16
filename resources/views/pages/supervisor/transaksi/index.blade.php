@@ -39,6 +39,9 @@
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-filter"></i> Filter</button>
+                                <a href="{{route('generateLaporan')}}" class="btn btn-sm btn-success">
+                                    Export Laporan Excel
+                                </a>
                             </div>
                         </form>
                     </div>
