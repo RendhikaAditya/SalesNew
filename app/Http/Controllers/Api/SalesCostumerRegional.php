@@ -33,10 +33,12 @@ class SalesCostumerRegional extends Controller
                 array_push($data[0]['sales']['kota'],
                     $kota->kabupaten_kota
                 );
-                array_push($data[0]['costumer'], [
-                    "kota" => $kota->kabupaten_kota,
-                    "costumer" => $kota->costumer
-                ]);
+                foreach ($kota->costumer as $c) {
+                    array_push($data[0]['costumer'], [
+                        "costumer" => $c->nama_costumer
+                    ]);
+                    // array_unique($data[0]['costumer']);
+                }
             }
         }
         return response()->json($data[0]);

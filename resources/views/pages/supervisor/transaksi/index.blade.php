@@ -15,13 +15,33 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Nama Costumer</label>
-                                        <input type="text" name="costumer" class="form-control" placeholder="Nama Costumer">
+                                        <select class="form-control js-example-basic-single" name="costumer">
+                                            <option value="{{null}}" selected>Cari Costumer</option>
+                                            @foreach ($costumer as $c)
+                                                <option
+                                                {{
+                                                    request()->get("costumer") !== null && request()->get('costumer') === $c->nama_costumer ? "selected" : ""
+                                                }}
+                                                value="{{$c->nama_costumer}}">{{$c->nama_costumer}}</option>
+                                            @endforeach
+                                        </select>
+                                        {{-- <input type="text" name="costumer" class="form-control" placeholder="Nama Costumer"> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Nama Sales</label>
-                                        <input type="text" name="sales" class="form-control" placeholder="Nama Sales">
+                                        <select class="form-control js-example-basic-single" name="sales">
+                                            <option value="{{null}}" selected>Cari Sales</option>
+                                            @foreach ($sales as $s)
+                                                <option
+                                                {{
+                                                    request()->get("sales") !== null && request()->get('sales') === $s->nama_sales ? "selected" : ""
+                                                }}
+                                                value="{{$s->nama_sales}}">{{$s->nama_sales}}</option>
+                                            @endforeach
+                                        </select>
+                                        {{-- <input type="text" name="sales" class="form-control" placeholder="Nama Sales"> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-3">

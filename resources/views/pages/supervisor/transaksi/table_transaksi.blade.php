@@ -51,13 +51,8 @@
                                             @if (Auth::user()->id_level == "2")
                                                 <td>
                                                     <div class="row">
-                                                        <div class="col-6">
-                                                            <a href="{{route("unapproveTransaksi",$o['id_order'])}}" class="btn btn-primary btn-sm"><i class="fa fa-times"></i></a>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <a href="{{route("deleteTransaksi",$o['id_order'])}}" class="btn btn-sm btn-danger">
-                                                                <i class="fa fa-trash"></i>
-                                                            </a>
+                                                        <div class="col-12">
+                                                            <a href="{{route("unapproveTransaksi",$o['id_order'])}}" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -78,6 +73,10 @@
                                         @if (Auth::user()->id_level == 2)
                                             <th>Aksi</th>
                                         @endif
+                                    </tr>
+                                    <tr>
+                                        <th colspan="{{Auth::user()->id_level == 2 ? 7 : 6}}">Total Harga</th>
+                                        <td>{{"Rp.". number_format($total_approve)}}</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -141,7 +140,7 @@
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-6">
-                                                            <a href="{{route("approveTransaksi",$o['id_order'])}}" class="btn btn-primary btn-sm"><i class="fa fa-check"></i></a>
+                                                            <a href="{{route("approveTransaksi",$o['id_order'])}}" class="btn btn-success btn-sm"><i class="fa fa-check"></i></a>
                                                         </div>
                                                         <div class="col-6">
                                                             <a href="{{route("deleteTransaksi",$o['id_order'])}}" class="btn btn-sm btn-danger">
@@ -167,6 +166,10 @@
                                         @if (Auth::user()->id_level == 2)
                                             <th>Aksi</th>
                                         @endif
+                                    </tr>
+                                    <tr>
+                                        <th colspan="{{Auth::user()->id_level == 2 ? 7 : 6}}">Total Harga</th>
+                                        <td>{{"Rp.". number_format($total_notapprove)}}</td>
                                     </tr>
                                 </tfoot>
                             </table>

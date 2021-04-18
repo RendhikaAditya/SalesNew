@@ -24,48 +24,126 @@ class TransaksiController extends Controller
         return $order;
     }
 
-    public function index()
-    {
-        $order_detail = $this->getData();
-        return view("pages.supervisor.transaksi.index", compact("order_detail"));
+    public function getHargaApprove() {
+        $order =  Order::all();
+        $total = 0;
+        foreach ($order as $o) {
+            $o->detail_order[0]->status == 1 ? $total += $o->total_harga : "";
+        }
+        return $total;
     }
 
-    public function filter(Request $request) {
+     public function getHargaNotApprove() {
+        $order =  Order::all();
+        $total = 0;
+        foreach ($order as $o) {
+            $o->detail_order[0]->status == 0 ? $total += $o->total_harga : "";
+        }
+        return $total;
+    }
+
+    public function index(Request $request)
+    {
+        $order_detail = $this->getData();
+        $total_approve = $this->getHargaApprove();
+        $total_notapprove = $this->getHargaNotApprove();
+        $costumer = Costumer::all();
+        $sales = Sales::all();
+        session()->put("order_detail",$order_detail);
+        return view("pages.supervisor.transaksi.index", compact("order_detail", "total_approve", "total_notapprove","costumer", "sales"));
+    }
+
+    public function filter(Request $request)
+    {
         $costumer = $request->costumer;
         $sales = $request->sales;
         $tgl_awal = $request->tgl_awal;
         $tgl_akhir = $request->tgl_akhir;
+        $total_approve = null;
+        $total_notapprove = null;
         $order_detail = [];
+        $filter = new FilterController();
         // Tidak ada filter
         if($costumer === null && $sales === null && $tgl_awal === null && $tgl_akhir === null) {
             $order_detail = $this->getData();
+            $total_approve = $this->getHargaApprove();
+            $total_notapprove = $this->getHargaNotApprove();
         } else if($costumer !== null && $sales === null && $tgl_awal === null && $tgl_akhir === null) {
+            // Mencari  Data Costumer Untuk Data Transaksi
             $cc = Costumer::where("nama_costumer", "LIKE", '%'.$costumer.'%')->get();
-           foreach ($cc as $c) {
+            $total_approve = $filter->getTotalHarga(Costumer::class,"nama_costumer","id_costumer",$costumer,1);
+            $total_notapprove = $filter->getTotalHarga(Costumer::class,"nama_costumer","id_costumer",$costumer,0);
+            foreach ($cc as $c) {
                 foreach ($c->order as $o) {
                     array_push($order_detail,$o);
                 }
             }
+
         } else if($sales !== null && $costumer === null && $tgl_akhir === null && $tgl_awal === null) {
-            $ss = Sales::where("nama_sales", "LIKE", "%".$sales."%")->get();
+            // Mencari  Data Costumer Untuk Data Transaksi
+            $ss = Sales::where("nama_sales", "LIKE", '%'.$sales.'%')->get();
+            $total_approve = $filter->getTotalHarga(Sales::class,"nama_sales","id_sales",$sales,1);
+            $total_notapprove = $filter->getTotalHarga(Sales::class,"nama_sales","id_sales",$sales,0);
             foreach ($ss as $s) {
-                foreach ($s->order as $s) {
-                    array_push($order_detail,$s);
+                foreach ($s->order as $o) {
+                    array_push($order_detail,$o);
                 }
             }
-        } else if($tgl_awal !== null && $tgl_akhir !== null) {
+        } else if($costumer === null && $sales === null && $tgl_awal !== null && $tgl_akhir !== null) {
             $order_detail = Order::whereBetween("tgl_order", [$tgl_awal,$tgl_akhir])->get();
+            $total_approve = 0;
+            $total_notapprove = 0;
+
+            foreach ($order_detail as $od) {
+                $od->detail_order[0]->status == 1
+                ? $total_approve += $od->total_harga
+                : $total_notapprove += $od->total_harga;
+            }
+
+        } elseif ($costumer !== null && $tgl_awal !== null && $tgl_akhir !== null && $sales === null) {
+            $filter = new FilterController();
+            $order_detail = $filter->getTotalBaseActor(Costumer::class,"nama_costumer",$costumer,$tgl_awal,$tgl_akhir,null);
+            $total_approve = $filter->getTotalBaseActor(Costumer::class,"nama_costumer",$costumer,$tgl_awal,$tgl_akhir,1);
+            $total_notapprove = $filter->getTotalBaseActor(Costumer::class,"nama_costumer",$costumer,$tgl_awal,$tgl_akhir,0);
+        } else if($sales !== null && $tgl_awal !== null && $tgl_akhir !== null && $costumer === null) {
+            $filter = new FilterController();
+            $order_detail = $filter->getTotalBaseActor(Sales::class,"nama_sales",$sales,$tgl_awal,$tgl_akhir,null);
+            $total_approve = $filter->getTotalBaseActor(Sales::class,"nama_sales",$sales,$tgl_awal,$tgl_akhir,1);
+            $total_notapprove = $filter->getTotalBaseActor(Sales::class,"nama_sales",$sales,$tgl_awal,$tgl_akhir,0);
+        } elseif($costumer !== null && $sales !== null && $tgl_awal === null && $tgl_akhir === null) {
+            $d_costumer = Costumer::where("nama_costumer",$costumer)->first("id_costumer");
+            $d_sales = Sales::where("nama_sales", $sales)->first("id_sales");
+            $order_detail = Order::where("id_costumer",$d_costumer->id_costumer)->where("id_sales",$d_sales->id_sales)->get();
+            foreach ($order_detail as $od) {
+                $od->detail_order[0]->status == 1
+                ? $total_approve += $od->total_harga
+                : $total_notapprove += $od->total_harga;
+            }
+        } elseif($costumer !== null && $sales !== null && $tgl_awal !== null && $tgl_akhir !== null) {
+            $d_costumer = Costumer::where("nama_costumer",$costumer)->first("id_costumer");
+            $d_sales = Sales::where("nama_sales", $sales)->first("id_sales");
+            $order_detail = Order::where("id_costumer",$d_costumer->id_costumer)
+            ->where("id_sales",$d_sales->id_sales)
+            ->whereBetween("tgl_order",[$tgl_awal,$tgl_akhir])->get();
+            foreach ($order_detail as $od) {
+                $od->detail_order[0]->status == 1
+                ? $total_approve += $od->total_harga
+                : $total_notapprove += $od->total_harga;
+            }
         }
-        return view("pages.supervisor.transaksi.index", compact("order_detail"));
-     }
+        $costumer = Costumer::all();
+        $sales = Sales::all();
+        session()->put("order_detail",$order_detail);
+        return view("pages.supervisor.transaksi.index", compact("order_detail", "total_approve", "total_notapprove","costumer", "sales"));
+    }
 
     public function approve($o)
     {
         $detail_orders = Detail_Order::where("id_order",$o)->get();
+        $order = Order::where('id_order',$o)->first("total_harga");
         $edited = null;
         foreach ($detail_orders as $d) {
-            // dd($d->order->costumer->reset === (int)date("m"));
-            if($d->order->costumer->reset !== (int)date("m")) {
+            if((int)$d->order->costumer->reset !== (int)date("m")) {
                 $d->order->costumer->update([
                     "target_tercapai" => 0,
                     "reset" => (int) date("m")
@@ -74,7 +152,7 @@ class TransaksiController extends Controller
             $edited = $d->update([
                 "status" => 1
             ]);
-            $target_tercapai = (int)$d->order->costumer->target_tercapai + ($d->harga * $d->jml_barang);
+            $target_tercapai = (int)$d->order->costumer->target_tercapai + (int)$order->total_harga;
             $d->order->costumer->update([
                 "target_tercapai" => $target_tercapai
             ]);
@@ -89,15 +167,14 @@ class TransaksiController extends Controller
     {
         $edited = null;
         $detail_orders = Detail_Order::where("id_order",$o)->get();
+        $order = Order::where('id_order',$o)->first();
         foreach ($detail_orders as $d) {
-            $target_tercapai = $d->order->costumer->target_tercapai -  $d->order->costumer->target_tercapai - ($d->harga * $d->jumlah);
-            $d->order->costumer->update([
-                "target_tercapai" => $target_tercapai
-            ]);
             $edited = $d->update([
                 "status" => "0"
             ]);
         }
+        // dd($order->costumer->target_tercapai);
+        $order->costumer->update(["target_tercapai" => $order->costumer->target_tercapai - $order->total_harga]);
         $edited === true
             ? Alert::success("Berhasil", "Transaksi Telah Dibatalkan")
             : Alert::error("Gagal", "Transaksi Gagak Dibatalkan");
@@ -131,19 +208,23 @@ class TransaksiController extends Controller
         return Excel::download(new LaporanTransaksi, "laporan-transaksi.xlsx");
     }
 
-    public function laporan() {
-        $detail_order = Detail_Order::where("status",1)->orderBy('id', 'desc')->get();
+    public function laporan(Request $request) {
+        $detail_order = session()->get("order_detail");
         ModelsLaporanTransaksi::truncate();
         foreach ($detail_order as $d) {
-           DB::table('laporan_transaksis')->insert([
-                "id_order" => $d->id_order,
-                "nama_barang" => $d->barang->nama_barang,
-                "nama_costumer" => $d->order->costumer->nama_costumer,
-                "nama_sales" => $d->order->sales->nama_sales,
-                "jml_barang" => $d->jml_barang,
-                "tgl_order" => $d->order->tgl_order,
-                "status" => "Dikonfirmasi"
-            ]);
+            foreach ($d->detail_order as $o) {
+                if ($o->status == 1) {
+                    DB::table('laporan_transaksis')->insert([
+                         "id_order" => $o->id_order,
+                         "nama_barang" => $o->barang->nama_barang,
+                         "nama_costumer" => $o->order->costumer->nama_costumer,
+                         "nama_sales" => $o->order->sales->nama_sales,
+                         "jml_barang" => $o->jml_barang,
+                         "tgl_order" => $o->order->tgl_order,
+                         "status" => "Dikonfirmasi"
+                     ]);
+                }
+            }
         }
        return $this->download();
     }

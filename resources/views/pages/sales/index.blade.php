@@ -15,11 +15,11 @@
                             <table class="table zero-configuration">
                                 <thead>
                                     <tr>
-                                        <th>No.Telpon</th>
-                                        <th>Username</th>
                                         <th>Nama Sales</th>
-                                        <th>Alamat Sales</th>
                                         <th>Jenis Kelamin</th>
+                                        <th>No.Telpon</th>
+                                        <th>Alamat Sales</th>
+                                        <th>Username</th>
                                         <th>Provinsi</th>
                                         <th>Kota</th>
                                         <th>Aksi</th>
@@ -28,11 +28,11 @@
                                 <tbody>
                                     @foreach ($data as $s)
                                         <tr>
-                                            <td>{{$s['nohp']}}</td>
-                                            <td>{{$s['username']}}</td>
                                             <td>{{$s["nama_sales"]}}</td>
-                                            <td>{{$s["alamat_sales"]}}</td>
                                             <td>{{$s["gender_sales"]}}</td>
+                                            <td>{{$s['nohp']}}</td>
+                                            <td>{{$s["alamat_sales"]}}</td>
+                                            <td>{{$s['username']}}</td>
                                             <td>{{$s["provinsi"]}}</td>
                                             <td>
                                                 <ul style="font-size: 2vh">
@@ -56,11 +56,11 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>No.Telpon</th>
-                                        <th>Username</th>
                                         <th>Nama Sales</th>
-                                        <th>Alamat Sales</th>
                                         <th>Jenis Kelamin</th>
+                                        <th>No.Telpon</th>
+                                        <th>Alamat Sales</th>
+                                        <th>Username</th>
                                         <th>Provinsi</th>
                                         <th>Kota</th>
                                         <th>Aksi</th>

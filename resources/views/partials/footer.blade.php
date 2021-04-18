@@ -20,7 +20,7 @@
 
     kategori.addEventListener("change", e => {
         let nama_paket = e.target.value.split("-")[1];
-        nama_paket === "paket" ? editor.style.display="initial" : editor.style.display="none"
+        nama_paket.ignoreCase === "paket" ? editor.style.display="initial" : editor.style.display="none"
      })
 
   </script>

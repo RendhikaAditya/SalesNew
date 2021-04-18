@@ -11,8 +11,8 @@ use App\Http\Controllers\Api\ControllerSales;
 // use App\Http\Controllers\Api\ContollerCostumer;
 // use App\Http\Controllers\Api\ContollerSales;
 use App\Http\Controllers\Api\KeranjangController;
-use App\Http\Controllers\Api\SalesCostumerRegional;
 use App\Http\Controllers\Api\TransaksiController;
+use App\Http\Controllers\Api\SalesCostumerRegional;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +63,4 @@ Route::group(["prefix" => "transaksi"], function () {
 Route::group(["prefix" => "costumer-regional"],function() {
     Route::get("", [SalesCostumerRegional::class, "getSalesCostumer"]);
 });
+

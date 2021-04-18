@@ -9,6 +9,6 @@ class AdminController extends Controller
 {
     public function index() {
         $transaksi = new TransaksiController();
-        return $transaksi->index();
+        return $transaksi->index(new Request(["pass" => true]));
     }
 }

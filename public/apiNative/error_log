@@ -1,0 +1,51 @@
+[17-Apr-2021 16:49:55 Asia/Jakarta] PHP Notice:  Undefined index: id_order in /home/marijaya/public_html/public/apiNative/update_detail.php on line 99
+[17-Apr-2021 16:49:55 Asia/Jakarta] PHP Notice:  Undefined variable: sql in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:49:55 Asia/Jakarta] PHP Warning:  mysqli_query(): Empty query in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:50:25 Asia/Jakarta] PHP Notice:  Undefined index: id_order in /home/marijaya/public_html/public/apiNative/update_detail.php on line 99
+[17-Apr-2021 16:50:25 Asia/Jakarta] PHP Notice:  Undefined variable: sql in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:50:25 Asia/Jakarta] PHP Warning:  mysqli_query(): Empty query in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:50:27 Asia/Jakarta] PHP Notice:  Undefined index: id_order in /home/marijaya/public_html/public/apiNative/update_detail.php on line 99
+[17-Apr-2021 16:50:27 Asia/Jakarta] PHP Notice:  Undefined variable: sql in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:50:27 Asia/Jakarta] PHP Warning:  mysqli_query(): Empty query in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:51:36 Asia/Jakarta] PHP Notice:  Undefined index: id_order in /home/marijaya/public_html/public/apiNative/update_detail.php on line 99
+[17-Apr-2021 16:51:36 Asia/Jakarta] PHP Notice:  Undefined variable: sql in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:51:36 Asia/Jakarta] PHP Warning:  mysqli_query(): Empty query in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:53:18 Asia/Jakarta] PHP Notice:  Undefined index: id_order in /home/marijaya/public_html/public/apiNative/update_detail.php on line 99
+[17-Apr-2021 16:53:18 Asia/Jakarta] PHP Notice:  Undefined variable: sql in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:53:18 Asia/Jakarta] PHP Warning:  mysqli_query(): Empty query in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:53:42 Asia/Jakarta] PHP Notice:  Undefined index: id_order in /home/marijaya/public_html/public/apiNative/update_detail.php on line 99
+[17-Apr-2021 16:53:42 Asia/Jakarta] PHP Notice:  Undefined variable: sql in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:53:42 Asia/Jakarta] PHP Warning:  mysqli_query(): Empty query in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:54:07 Asia/Jakarta] PHP Notice:  Undefined index: id_order in /home/marijaya/public_html/public/apiNative/update_detail.php on line 99
+[17-Apr-2021 16:54:07 Asia/Jakarta] PHP Notice:  Undefined variable: sql in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:54:07 Asia/Jakarta] PHP Warning:  mysqli_query(): Empty query in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:54:19 Asia/Jakarta] PHP Notice:  Undefined index: id_order in /home/marijaya/public_html/public/apiNative/update_detail.php on line 99
+[17-Apr-2021 16:54:19 Asia/Jakarta] PHP Notice:  Undefined variable: sql in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:54:19 Asia/Jakarta] PHP Warning:  mysqli_query(): Empty query in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:54:27 Asia/Jakarta] PHP Notice:  Undefined index: id_order in /home/marijaya/public_html/public/apiNative/update_detail.php on line 99
+[17-Apr-2021 16:54:27 Asia/Jakarta] PHP Notice:  Undefined variable: sql in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 16:54:27 Asia/Jakarta] PHP Warning:  mysqli_query(): Empty query in /home/marijaya/public_html/public/apiNative/update_detail.php on line 116
+[17-Apr-2021 17:00:29 Asia/Jakarta] PHP Notice:  Undefined index: id_order in /home/marijaya/public_html/public/apiNative/update_detail.php on line 99
+[17-Apr-2021 17:00:29 Asia/Jakarta] PHP Notice:  Trying to get property 'id_costumer' of non-object in /home/marijaya/public_html/public/apiNative/update_detail.php on line 103
+[17-Apr-2021 17:00:45 Asia/Jakarta] PHP Notice:  Undefined index: id_order in /home/marijaya/public_html/public/apiNative/update_detail.php on line 99
+[17-Apr-2021 17:00:45 Asia/Jakarta] PHP Notice:  Trying to get property 'id_costumer' of non-object in /home/marijaya/public_html/public/apiNative/update_detail.php on line 103
+[17-Apr-2021 17:01:39 Asia/Jakarta] PHP Notice:  Undefined variable: sql in /home/marijaya/public_html/public/apiNative/update_detail.php on line 119
+[17-Apr-2021 17:01:39 Asia/Jakarta] PHP Warning:  mysqli_query(): Empty query in /home/marijaya/public_html/public/apiNative/update_detail.php on line 119
+[17-Apr-2021 17:04:11 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:04:11 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:04:16 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:04:16 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:04:22 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:04:22 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:04:59 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:04:59 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:05:13 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:05:13 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:05:25 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:05:25 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:05:27 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:05:27 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:05:51 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:05:51 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:08:58 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121
+[17-Apr-2021 17:09:32 Asia/Jakarta] PHP Warning:  A non-numeric value encountered in /home/marijaya/public_html/public/apiNative/update_detail.php on line 121

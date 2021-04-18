@@ -16,7 +16,7 @@
                                 <thead>
                                     <tr>
                                         <th>QR</th>
-                                        <th>Nama Costumer</th>
+                                        <th>Nama Costumer</>
                                         <th>Alamat Costumer</th>
                                         <th>Target Harga Costumer</th>
                                         <th>Target Harga Tercapai</th>
@@ -32,6 +32,7 @@
                                                 {{
                                                     \QrCode::size(75)->generate($c->nama_costumer)
                                                 }}
+                                            <a href="{{route('downloadQR',$c)}}">Download</a>
                                             </td>
                                             <td>{{$c->nama_costumer}}</td>
                                             <td>{{$c->alamat_costumer}}</td>
@@ -57,7 +58,7 @@
                                 <tfoot>
                                     <tr>
                                         <th>QR</th>
-                                        <th>Nama Costumer</th>
+                                        <th>Nama Costumer</>
                                         <th>Alamat Costumer</th>
                                         <th>Target Harga Costumer</th>
                                         <th>Target Harga Tercapai</th>
@@ -91,5 +92,7 @@
 @push('table-init-js')
   <script src="/assets/js/scripts/datatables/datatable.js"></script>
 @endpush
-
+@php
+     Storage::delete(session('img'));
+@endphp
 @endsection

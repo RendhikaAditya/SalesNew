@@ -1,8 +1,11 @@
 <?php
 
 use App\Models\Barang;
+use App\Models\Costumer;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\UserController;
@@ -14,7 +17,6 @@ use App\Http\Controllers\Web\KategoriController;
 use App\Http\Controllers\Web\TransaksiController;
 use App\Http\Controllers\Web\SupervisorController;
 use App\Http\Controllers\Web\BentukPembayaranController;
-
 
 Route::group(["middleware" => "guest"], function () {
     Route::get('/', [AuthController::class, 'getLogin'])->name("login");
@@ -100,7 +102,13 @@ Route::group(["middleware" => "auth"], function () {
         });
     });
 
-
+    Route::get('/download/{c:id_costumer}',function(Request $r, Costumer $c) {
+        $qr =  \QrCode::size(300)->generate($c->nama_costumer);
+        $output_file = '/qr-code/img-' . time() . '.png';
+        Storage::disk('local')->put($output_file, $qr);
+        $r->session()->put("img", [$output_file]);
+        return Storage::download($output_file);
+    })->name("downloadQR");
 
     Route::get('/logout', function () {
         Auth::logout();
