@@ -1,8 +1,11 @@
 <?php
 
 use App\Models\Barang;
+use App\Models\Costumer;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\UserController;
@@ -14,7 +17,6 @@ use App\Http\Controllers\Web\KategoriController;
 use App\Http\Controllers\Web\TransaksiController;
 use App\Http\Controllers\Web\SupervisorController;
 use App\Http\Controllers\Web\BentukPembayaranController;
-
 
 Route::group(["middleware" => "guest"], function () {
     Route::get('/', [AuthController::class, 'getLogin'])->name("login");
@@ -83,8 +85,12 @@ Route::group(["middleware" => "auth"], function () {
 
         Route::get('/transaksi', [TransaksiController::class, "index"])->name("adminListTransaksi");
     });
+
     Route::get('/filter-transaksi', [TransaksiController::class, "filter"])->name("filter_transaksi");
     Route::get('/laporan-transaksi', [TransaksiController::class, "laporan"])->name("generateLaporan");
+    Route::get('/detail-transaksi/{o}', [TransaksiController::class, "detail"])->name("detailOrder");
+    Route::post('/detail-transaksi/{o}', [TransaksiController::class, "prosesDetail"]);
+
     Route::group(["middleware" => "supervisor", "prefix" => "supervisor"], function () {
         Route::get("", [SupervisorController::class, "index"])->name("supervisorIndex");
 
@@ -92,11 +98,17 @@ Route::group(["middleware" => "auth"], function () {
             Route::get("", [TransaksiController::class, "index"])->name("listTransaksi");
             Route::get("/approve/{o}", [TransaksiController::class, "approve"])->name("approveTransaksi");
             Route::get('/unapprove/{o}', [TransaksiController::class, "unapprove"])->name("unapproveTransaksi");
+            Route::get('/hapus-transaksi/{o}', [TransaksiController::class, "deleteTransaksi"])->name("deleteTransaksi");
         });
     });
 
-    Route::get('/detail-transaksi/{o}', [TransaksiController::class, "detail"])->name("detailOrder");
-    Route::post('/detail-transaksi/{o}', [TransaksiController::class, "prosesDetail"]);
+    Route::get('/download/{c:id_costumer}',function(Request $r, Costumer $c) {
+        $qr =  \QrCode::size(300)->generate($c->nama_costumer);
+        $output_file = '/qr-code/img-' . time() . '.png';
+        Storage::disk('local')->put($output_file, $qr);
+        $r->session()->put("img", [$output_file]);
+        return Storage::download($output_file);
+    })->name("downloadQR");
 
     Route::get('/logout', function () {
         Auth::logout();

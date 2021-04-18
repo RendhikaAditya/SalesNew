@@ -17,7 +17,7 @@ class supervisor
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->id_level === 2) {
+        if (Auth::user()->id_level == 2) {
             return $next($request);
         } else {
             abort(403, "Anda Tidak Bisa Mengakses Halaman Ini !!!!");

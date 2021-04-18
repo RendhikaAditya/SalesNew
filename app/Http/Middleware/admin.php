@@ -17,7 +17,7 @@ class admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->id_level === 1) {
+        if (Auth::user()->id_level == 1) {
             return $next($request);
         } else {
             abort(403, "Anda Tidak Bisa Mengakses Halaman Ini !!!!");

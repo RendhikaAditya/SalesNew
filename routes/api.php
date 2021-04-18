@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\ControllerSales;
 // use App\Http\Controllers\Api\ContollerSales;
 use App\Http\Controllers\Api\KeranjangController;
 use App\Http\Controllers\Api\TransaksiController;
+use App\Http\Controllers\Api\SalesCostumerRegional;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,3 +59,8 @@ Route::group(["prefix" => "transaksi"], function () {
     Route::post('', [TransaksiController::class, "transaksi"]);
     Route::get('/histori', [TransaksiController::class, "ambil_histori"]);
 });
+
+Route::group(["prefix" => "costumer-regional"],function() {
+    Route::get("", [SalesCostumerRegional::class, "getSalesCostumer"]);
+});
+

@@ -130,7 +130,11 @@ class TransaksiController extends Controller
             $idORd = $memu['id_order'];
             $data = Detail_Order::select()->where('id_order', '=', $idORd);
             $num = $data->count();
-            $barang[$i]["jumlah"] = $num;
+            foreach($data->get() as $d){
+                $s = $d->status;
+            }
+            $barang[$i]["status"]   =  $s;
+            $barang[$i]["jumlah"]   =  $num;
         }
 
         // dd($barang->toSql());

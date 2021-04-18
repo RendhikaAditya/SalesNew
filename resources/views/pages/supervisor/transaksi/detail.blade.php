@@ -40,26 +40,15 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">Alamat Sales</label>
-                                    <input type="text" value="{{
-                                        $detail[0]->order->sales->provinsi->provinsi.", ".
-                                        $detail[0]->order->sales->kota->kabupaten_kota.", ".
-                                        $detail[0]->order->sales->kecamatan->kecamatan.", ".
-                                        $detail[0]->order->sales->kelurahan->kelurahan." "
-                                    }}" class="form-control" disabled>
+                                    <input type="text" value="{{$detail[0]->order->sales->provinsi->provinsi.','.$detail[0]->order->sales->kota->kabupaten_kota}}" class="form-control" disabled>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">Total Jumlah Barang</label>
                                     <input type="number" class="form-control" value="{{$detail->sum('jml_barang')}}" disabled>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">Total Jumlah Harga</label>
-                                    <input type="number" class="form-control" value="{{$detail[0]->order->total_harga}}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -97,6 +86,14 @@
                                     </div>
                                 </div>
                             @endforeach
+                            <div class="row">
+                                  <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Total Jumlah Harga</label>
+                                    <input type="number" class="form-control" value="{{$detail[0]->order->total_harga}}" disabled>
+                                </div>
+                            </div>
+                            </div>
                             @if (Auth::user()->id_level == "2" && $detail[0]->status == "0")
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Edit</button>
